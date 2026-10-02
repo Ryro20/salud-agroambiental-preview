@@ -10,7 +10,7 @@ backend:
   name: github
   repo: Ryro20/salud-agroambiental-preview
   branch: main
-  base_url: https://vercel.app
+  base_url: https://salud-agroambiental-preview.vercel.app
   auth_endpoint: /auth
   use_graphql: true
   commit_messages:
