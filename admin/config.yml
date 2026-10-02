@@ -11,7 +11,7 @@ backend:
   repo: Ryro20/salud-agroambiental-preview
   branch: main
   base_url: https://salud-agroambiental-preview.vercel.app
-  auth_endpoint: /auth
+  auth_endpoint: /callback
   use_graphql: true
   commit_messages:
     create: 'Crear entrada "{{slug}}"'
