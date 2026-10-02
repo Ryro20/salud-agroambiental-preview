@@ -18,7 +18,7 @@
       const themeLink = document.createElement('link');
 
       themeLink.rel = 'stylesheet';
-      themeLink.href = siteAssetUrl('admin/admin.css');
+      themeLink.href = siteAssetUrl('admin/admin.css?v=2');
       themeLink.dataset.salbiAdminTheme = 'true';
 
       document.head.appendChild(themeLink);

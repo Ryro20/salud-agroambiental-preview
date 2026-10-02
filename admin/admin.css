@@ -129,6 +129,23 @@ body.salbi-admin {
 [class*="StatusBar"] { border-top-color: var(--sa-line) !important; }
 [class*="EditorContainer"] { background: var(--sa-surface) !important; }
 
+#nc-root [class*="ToolbarDropdown-buttonMargin"]:has([class*="PublishButton"]) {
+  position: fixed !important;
+  right: clamp(16px, 3vw, 36px) !important;
+  bottom: max(18px, env(safe-area-inset-bottom)) !important;
+  z-index: 2001 !important;
+  margin: 0 !important;
+}
+
+#nc-root [class*="ToolbarDropdown-buttonMargin"]:has([class*="PublishButton"]) [class*="PublishButton"] {
+  min-height: 48px;
+  padding: 0 20px;
+  border-radius: 999px;
+  background: var(--sa-green-dark);
+  color: #fff;
+  box-shadow: var(--sa-shadow);
+}
+
 @media (max-width: 700px) {
   .salbi-admin-bar { padding: 0 14px; }
   .salbi-admin-brand small { display: none; }
