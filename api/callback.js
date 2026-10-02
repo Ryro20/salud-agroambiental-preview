@@ -69,7 +69,7 @@ module.exports = async function handler(req, res) {
   try {
     config = getConfig();
   } catch (error) {
-    console.error('Configuración OAuth incompleta o no válida.');
+    console.error('Configuración OAuth no válida:', error.message);
     return res.status(500).send('El inicio de sesión no está configurado.');
   }
 
