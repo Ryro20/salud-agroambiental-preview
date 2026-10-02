@@ -1,0 +1,111 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display:ital@0;1&display=swap');
+
+:root {
+  color-scheme: light;
+
+  --bg: #f7f4ed;
+  --surface: #fffdf8;
+  --surface-alt: #ebe6d9;
+  --ink: #19362a;
+  --ink-soft: #31473a;
+  --text: #405248;
+  --muted: #6e7c73;
+  --line: #d7ded4;
+  --line-dark: #bcc8be;
+
+  --green: #2f6c50;
+  --green-dark: #173d2d;
+  --green-soft: #dce9dd;
+  --green-pale: #eef5ed;
+
+  --clay: #b86549;
+  --clay-soft: #f0d9ce;
+  --white: #fffdf8;
+
+  --forest-950: var(--ink);
+  --forest-900: var(--green-dark);
+  --forest-800: var(--green);
+  --forest-700: #5b856b;
+  --forest-600: #7ca289;
+  --forest-100: var(--green-soft);
+  --forest-050: var(--green-pale);
+  --sand: var(--bg);
+  --sand-warm: var(--surface-alt);
+  --paper: var(--surface);
+
+  --shadow-xs: 0 4px 14px rgba(23, 61, 45, .045);
+  --shadow-sm: 0 8px 22px rgba(23, 61, 45, .065);
+  --shadow: 0 14px 36px rgba(23, 61, 45, .09);
+  --shadow-md: 0 18px 42px rgba(23, 61, 45, .11);
+  --shadow-lg: 0 24px 56px rgba(23, 61, 45, .14);
+  --shadow-xl: 0 34px 80px rgba(23, 61, 45, .18);
+
+  --radius-xs: 6px;
+  --radius-sm: 9px;
+  --radius: 16px;
+  --radius-md: 20px;
+  --radius-lg: 26px;
+  --radius-pill: 999px;
+
+  --max-width: 1200px;
+  --reading-width: 720px;
+  --header-height: 76px;
+
+  --display: 'DM Serif Display', Georgia, serif;
+  --body: 'DM Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+  --ease: 180ms ease;
+  --ease-slow: 420ms cubic-bezier(.22, .61, .36, 1);
+  --ease-bounce: 260ms cubic-bezier(.2, .75, .25, 1.2);
+
+  --glass-bg: rgba(255, 253, 248, .76);
+  --glass-border: rgba(255, 255, 255, .72);
+  --hero-glow: rgba(47, 108, 80, .07);
+  --entry-hover: rgba(220, 233, 221, .45);
+}
+
+[data-theme='dark'] {
+  color-scheme: dark;
+
+  --bg: #0b1410;
+  --surface: #111d16;
+  --surface-alt: #17261c;
+  --ink: #edf5ee;
+  --ink-soft: #cedbce;
+  --text: #bccbbf;
+  --muted: #8fa293;
+  --line: #2a4032;
+  --line-dark: #395240;
+
+  --green: #8fbe9c;
+  --green-dark: #b8d4bd;
+  --green-soft: #1d3827;
+  --green-pale: #172a1d;
+
+  --clay: #e0a085;
+  --clay-soft: #563b30;
+  --white: #f4faf4;
+
+  --forest-950: var(--ink);
+  --forest-900: #c7dfcc;
+  --forest-800: var(--green);
+  --forest-700: #75a080;
+  --forest-600: #567d60;
+  --forest-100: var(--green-soft);
+  --forest-050: var(--green-pale);
+  --sand: var(--bg);
+  --sand-warm: var(--surface-alt);
+  --paper: var(--surface);
+
+  --shadow-xs: 0 4px 14px rgba(0, 0, 0, .18);
+  --shadow-sm: 0 8px 22px rgba(0, 0, 0, .22);
+  --shadow: 0 14px 36px rgba(0, 0, 0, .28);
+  --shadow-md: 0 18px 42px rgba(0, 0, 0, .32);
+  --shadow-lg: 0 24px 56px rgba(0, 0, 0, .38);
+  --shadow-xl: 0 34px 80px rgba(0, 0, 0, .46);
+
+  --glass-bg: rgba(17, 29, 22, .8);
+  --glass-border: rgba(184, 212, 189, .12);
+  --hero-glow: rgba(143, 190, 156, .08);
+  --entry-hover: rgba(29, 56, 39, .76);
+}

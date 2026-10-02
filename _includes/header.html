@@ -1,0 +1,55 @@
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="site-brand" href="{{ '/' | relative_url }}" aria-label="{{ site.title }} — Inicio">
+      <picture class="brand-mark">
+        <source type="image/webp" srcset="{{ '/assets/img/logo-320.webp' | relative_url }} 320w, {{ '/assets/img/logo-640.webp' | relative_url }} 640w, {{ '/assets/img/logo.webp' | relative_url }} 1024w" sizes="(max-width:600px) 48px, 40px">
+        <img src="{{ '/assets/img/logo.png' | relative_url }}" alt="{{ site.title }}">
+      </picture>
+      <span class="brand-copy">
+        <strong>{{ site.title }}</strong>
+        <small>Salud · Agro · Ambiente</small>
+      </span>
+    </a>
+
+    <button class="nav-toggle" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="site-navigation">
+      <span class="hamburger"><span></span></span>
+    </button>
+
+    <nav class="site-nav" id="site-navigation" aria-label="Navegación principal">
+      <ul class="nav-list">
+        {% for item in site.data.nav %}
+        <li class="nav-item{% if item.children %} has-children{% endif %}{% if item.cta %} nav-item--cta{% endif %}">
+          <a href="{{ item.url | relative_url }}" class="nav-link{% assign item_active = false %}{% if page.url == item.url %}{% assign item_active = true %}{% endif %}{% if item.children %}{% for child in item.children %}{% if page.url == child.url %}{% assign item_active = true %}{% endif %}{% endfor %}{% endif %}{% if item_active %} is-active{% endif %}">
+            <span>{{ item.title }}</span>{% if item.children %}<span class="nav-chevron" aria-hidden="true">+</span>{% endif %}
+          </a>
+          {% if item.children %}
+          <ul class="nav-submenu">
+            {% for child in item.children %}
+            <li><a href="{{ child.url | relative_url }}"{% if page.url == child.url %} class="is-active"{% endif %}>{{ child.title }}</a></li>
+            {% endfor %}
+          </ul>
+          {% endif %}
+        </li>
+        {% endfor %}
+      </ul>
+    </nav>
+    <button
+      class="theme-toggle"
+      type="button"
+      aria-label="Cambiar a modo oscuro"
+      aria-pressed="false"
+      title="Cambiar a modo oscuro"
+    >
+      <svg class="moon-icon" viewBox="0 0 24 24" aria-hidden="true">
+        <circle cx="12" cy="12" r="8.5" fill="currentColor"/>
+        <circle cx="9" cy="9" r="1.35" fill="var(--paper)"/>
+        <circle cx="15.4" cy="10.6" r="1" fill="var(--paper)"/>
+        <circle cx="12.2" cy="15.2" r="1.65" fill="var(--paper)"/>
+      </svg>
+      <svg class="sun-icon" viewBox="0 0 24 24" aria-hidden="true">
+        <circle cx="12" cy="12" r="3.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+        <path d="M12 2.5v2M12 19.5v2M21.5 12h-2M4.5 12h-2M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4M18.7 18.7l-1.4-1.4M6.7 6.7 5.3 5.3" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.8"/>
+      </svg>
+    </button>
+  </div>
+</header>

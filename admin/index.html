@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <meta name="theme-color" content="#183b2a">
+  <title>Panel editorial · Salud Agroambiental</title>
+  <link rel="icon" href="/assets/img/logo.png">
+</head>
+<body class="salbi-admin">
+  <header class="salbi-admin-bar">
+    <a class="salbi-admin-brand" href="/" target="_blank" rel="noopener">
+      <img src="/assets/img/logo.png" alt="Salud Agroambiental">
+      <span>
+        <strong>Salud Agroambiental</strong>
+        <small>Panel editorial</small>
+      </span>
+    </a>
+
+    <div class="salbi-admin-actions">
+      <a href="/" target="_blank" rel="noopener" class="salbi-admin-link">Ver web</a>
+      <button type="button" class="salbi-admin-link salbi-admin-help" data-admin-help>Ayuda</button>
+    </div>
+  </header>
+
+  <main class="salbi-admin-main">
+    <div id="nc-root"></div>
+  </main>
+
+  <dialog class="salbi-admin-dialog" data-admin-dialog>
+    <div class="salbi-admin-dialog__inner">
+      <button type="button" class="salbi-admin-dialog__close" data-admin-close aria-label="Cerrar">×</button>
+      <p class="salbi-admin-eyebrow">SALUD AGROAMBIENTAL</p>
+      <h1>Cómo usar el panel</h1>
+      <p>Desde aquí puedes crear y modificar entradas sin tocar el código de la web.</p>
+      <div class="salbi-admin-help-grid">
+        <article><strong>Contenido</strong><span>Añade, elimina y reordena bloques.</span></article>
+        <article><strong>Imágenes</strong><span>Sube fotografías, define su tamaño, alineación y pie de foto.</span></article>
+        <article><strong>Galerías</strong><span>Usa tantas imágenes como necesites y cambia el número de columnas.</span></article>
+        <article><strong>Vista previa</strong><span>La columna de preview utiliza la misma estética y componentes que el artículo publicado.</span></article>
+      </div>
+      <button type="button" class="salbi-admin-primary" data-admin-close>Entendido</button>
+    </div>
+  </dialog>
+
+  <script>
+    window.CMS_MANUAL_INIT = true;
+  </script>
+  <script defer src="https://unpkg.com/decap-cms@3.16.2/dist/decap-cms.js"></script>
+  <script defer src="/admin/custom-cms.js?v=2"></script>
+</body>
+</html>

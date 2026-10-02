@@ -1,0 +1,62 @@
+{% assign comments = site.comments %}
+{% if comments.enabled and comments.repo and comments.repo_id and comments.category and comments.category_id %}
+<section class="comments" aria-labelledby="comments-title">
+  <header class="comments__header">
+    <div>
+      <p class="comments__eyebrow">Participa</p>
+      <h2 id="comments-title">Comentarios</h2>
+      <p class="comments__intro">Comparte tu opinión, experiencia o pregunta con la comunidad.</p>
+    </div>
+  </header>
+
+  <div class="comments__embed">
+    <script src="https://giscus.app/client.js"
+            data-repo="{{ comments.repo | escape }}"
+            data-repo-id="{{ comments.repo_id | escape }}"
+            data-category="{{ comments.category | escape }}"
+            data-category-id="{{ comments.category_id | escape }}"
+            data-mapping="{{ comments.mapping | default: 'pathname' | escape }}"
+            data-strict="{{ comments.strict | default: '0' | escape }}"
+            data-reactions-enabled="{{ comments.reactions_enabled | default: '1' | escape }}"
+            data-emit-metadata="{{ comments.emit_metadata | default: '0' | escape }}"
+            data-input-position="{{ comments.input_position | default: 'bottom' | escape }}"
+            data-theme="{{ comments.theme_light | default: 'light' | escape }}"
+            data-lang="{{ comments.lang | default: 'es' | escape }}"
+            data-loading="{{ comments.loading | default: 'lazy' | escape }}"
+            crossorigin="anonymous"
+            async>
+    </script>
+    <noscript>Activa JavaScript para cargar los comentarios.</noscript>
+  </div>
+</section>
+
+<script>
+  (function () {
+    var root = document.documentElement;
+    var darkTheme = {{ comments.theme_dark | default: 'dark_dimmed' | jsonify }};
+    var lightTheme = {{ comments.theme_light | default: 'light' | jsonify }};
+
+    function updateGiscusTheme() {
+      var iframe = document.querySelector('iframe.giscus-frame');
+      if (!iframe) return;
+      iframe.contentWindow.postMessage(
+        {
+          giscus: {
+            setConfig: { theme: root.dataset.theme === 'dark' ? darkTheme : lightTheme }
+          }
+        },
+        'https://giscus.app'
+      );
+    }
+
+    window.addEventListener('message', function (event) {
+      if (event.origin === 'https://giscus.app') updateGiscusTheme();
+    });
+
+    var observer = new MutationObserver(function () {
+      window.setTimeout(updateGiscusTheme, 50);
+    });
+    observer.observe(root, { attributes: true, attributeFilter: ['data-theme'] });
+  })();
+</script>
+{% endif %}

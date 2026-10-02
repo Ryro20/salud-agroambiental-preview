@@ -1,0 +1,433 @@
+
+locale: es
+site_url: https://saludagroambiental.org
+display_url: https://saludagroambiental.org
+show_preview_links: true
+search: true
+publish_mode: simple
+
+backend:
+  name: test-repo
+  repo: REEMPLAZAR_USUARIO/salud-agroambiental
+  branch: main
+  base_url: https://REEMPLAZAR-POR-TU-PROXY.workers.dev
+  auth_endpoint: /auth
+  use_graphql: true
+  commit_messages:
+    create: 'Crear entrada "{{slug}}"'
+    update: 'Actualizar entrada "{{slug}}"'
+    delete: 'Eliminar entrada "{{slug}}"'
+    uploadMedia: 'Subir imagen "{{path}}"'
+    deleteMedia: 'Eliminar imagen "{{path}}"'
+
+media_folder: "assets/img/uploads"
+public_folder: "/assets/img/uploads"
+
+slug:
+  encoding: ascii
+  clean_accents: true
+  sanitize_replacement: "-"
+
+logo:
+  src: "/assets/img/logo.png"
+  show_in_header: true
+
+collections:
+  - name: "posts"
+    label: "Entradas del blog"
+    label_singular: "Entrada"
+    description: "Crea, edita, reorganiza y publica artículos sin tocar HTML."
+    folder: "_posts"
+    create: true
+    delete: true
+    extension: "html"
+    format: "yaml-frontmatter"
+    frontmatter_delimiter: "---"
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    preview_path: "blog/{{slug}}/"
+    sortable_fields: ["date", "title"]
+    summary: "{{title}} · {{date}}"
+    editor:
+      preview: true
+
+    fields:
+      - label: "Título"
+        name: "title"
+        widget: "string"
+        hint: "El título principal que aparecerá en el artículo y en el listado del blog."
+
+      - label: "Fecha de publicación"
+        name: "date"
+        widget: "datetime"
+        format: "YYYY-MM-DD HH:mm:ss Z"
+        time_format: "HH:mm"
+
+      - label: "Última modificación"
+        name: "modified_date"
+        widget: "datetime"
+        required: false
+        format: "YYYY-MM-DD HH:mm:ss Z"
+        time_format: "HH:mm"
+        hint: "Opcional. Úsalo cuando quieras reflejar una actualización importante del artículo."
+
+      - label: "Resumen"
+        name: "excerpt"
+        widget: "text"
+        required: false
+        hint: "Una o dos frases. Se utiliza en el listado del blog y para compartir la entrada."
+
+      - label: "Categoría"
+        name: "categories"
+        widget: "list"
+        min: 1
+        max: 1
+        default:
+          - "Actualidad"
+        field:
+          label: "Categoría"
+          name: "category"
+          widget: "select"
+          options:
+            - "Actualidad"
+            - "Educación ambiental"
+            - "Residuos y reciclaje"
+            - "Naturaleza"
+            - "Agroecología"
+            - "Bienestar animal"
+            - "Actividades"
+            - "Asociación"
+
+      - label: "Etiquetas"
+        name: "tags"
+        widget: "list"
+        required: false
+        allow_add: true
+        allow_remove: true
+        allow_reorder: true
+        field:
+          label: "Etiqueta"
+          name: "tag"
+          widget: "string"
+        hint: "Palabras clave opcionales para organizar el contenido."
+
+      - label: "Autor"
+        name: "author"
+        widget: "string"
+        default: "Salud Agroambiental"
+        required: false
+
+      - label: "Imagen destacada"
+        name: "image"
+        widget: "image"
+        required: false
+        choose_url: false
+        media_library:
+          config:
+            multiple: false
+            max_file_size: 6291456
+        hint: "Imagen principal del artículo. Puedes dejarla vacía si el contenido empieza directamente con texto."
+
+      - label: "Texto alternativo de la imagen destacada"
+        name: "image_alt"
+        widget: "string"
+        required: false
+        hint: "Describe brevemente la imagen para accesibilidad."
+
+      - label: "Anchura de la imagen destacada"
+        name: "image_width"
+        widget: "salbi-percentage"
+        default: 100
+        required: false
+        hint: "Controla el ancho visual de la portada del artículo."
+
+      - label: "Contenido del artículo"
+        name: "blocks"
+        widget: "list"
+        allow_add: true
+        allow_remove: true
+        allow_reorder: true
+        types:
+          - label: "Texto enriquecido"
+            name: "rich-text"
+            widget: "object"
+            summary: "Texto enriquecido"
+            fields:
+              - label: "Contenido"
+                name: "content"
+                widget: "richtext"
+                buttons:
+                  - bold
+                  - italic
+                  - strikethrough
+                  - link
+                  - heading-two
+                  - heading-three
+                  - heading-four
+                  - quote
+                  - bulleted-list
+                  - numbered-list
+                editor_components: []
+                modes: ["rich_text", "raw"]
+
+          - label: "Encabezado"
+            name: "heading"
+            widget: "object"
+            summary: "{{fields.level}} · {{fields.text}}"
+            fields:
+              - label: "Nivel"
+                name: "level"
+                widget: "select"
+                options: ["H2", "H3", "H4"]
+                default: "H2"
+              - label: "Texto"
+                name: "text"
+                widget: "string"
+
+          - label: "Imagen"
+            name: "image"
+            widget: "object"
+            summary: "Imagen · {{fields.alt}}"
+            fields:
+              - label: "Imagen"
+                name: "image"
+                widget: "image"
+                choose_url: false
+                media_library:
+                  config:
+                    multiple: false
+                    max_file_size: 6291456
+              - label: "Texto alternativo"
+                name: "alt"
+                widget: "string"
+                hint: "Describe la imagen para lectores de pantalla."
+              - label: "Pie de foto"
+                name: "caption"
+                widget: "string"
+                required: false
+              - label: "Anchura"
+                name: "width"
+                widget: "salbi-percentage"
+                default: 100
+                hint: "Controla el ancho visual de la imagen dentro del contenido."
+              - label: "Alineación"
+                name: "align"
+                widget: "select"
+                options: ["izquierda", "centro", "derecha"]
+                default: "centro"
+              - label: "Altura"
+                name: "height"
+                widget: "select"
+                options: ["auto", "200px", "300px", "400px", "500px", "600px"]
+                default: "auto"
+              - label: "Ajuste de la imagen"
+                name: "fit"
+                widget: "select"
+                options: ["contain", "cover"]
+                default: "contain"
+
+          - label: "Galería de imágenes"
+            name: "gallery"
+            widget: "object"
+            summary: "Galería · {{fields.images.size}} imágenes"
+            fields:
+              - label: "Título de la galería"
+                name: "title"
+                widget: "string"
+                required: false
+              - label: "Columnas"
+                name: "columns"
+                widget: "select"
+                options: ["1", "2", "3", "4"]
+                default: "3"
+              - label: "Imágenes"
+                name: "images"
+                widget: "list"
+                allow_add: true
+                allow_remove: true
+                allow_reorder: true
+                fields:
+                  - label: "Imagen"
+                    name: "image"
+                    widget: "image"
+                    choose_url: false
+                    media_library:
+                      config:
+                        multiple: false
+                        max_file_size: 6291456
+                  - label: "Texto alternativo"
+                    name: "alt"
+                    widget: "string"
+                  - label: "Pie de foto"
+                    name: "caption"
+                    widget: "string"
+                    required: false
+                  - label: "Ajuste"
+                    name: "fit"
+                    widget: "select"
+                    options: ["cover", "contain"]
+                    default: "cover"
+                  - label: "Posición del recorte"
+                    name: "position"
+                    widget: "select"
+                    options: ["centro", "arriba", "abajo", "izquierda", "derecha"]
+                    default: "centro"
+
+          - label: "Imagen + texto"
+            name: "media-text"
+            widget: "object"
+            summary: "Imagen + texto · {{fields.position}}"
+            fields:
+              - label: "Imagen"
+                name: "image"
+                widget: "image"
+                choose_url: false
+                media_library:
+                  config:
+                    multiple: false
+                    max_file_size: 6291456
+              - label: "Texto alternativo"
+                name: "alt"
+                widget: "string"
+              - label: "Título"
+                name: "title"
+                widget: "string"
+                required: false
+              - label: "Contenido"
+                name: "content"
+                widget: "richtext"
+                buttons: [bold, italic, link, bulleted-list, numbered-list]
+                editor_components: []
+              - label: "Anchura de la imagen"
+                name: "image_width"
+                widget: "salbi-percentage"
+                default: 50
+                hint: "Controla cuánto espacio ocupa la imagen frente al texto."
+              - label: "Posición de la imagen"
+                name: "position"
+                widget: "select"
+                options: ["izquierda", "derecha"]
+                default: "izquierda"
+
+          - label: "Cita destacada"
+            name: "quote"
+            widget: "object"
+            summary: "Cita"
+            fields:
+              - label: "Cita"
+                name: "text"
+                widget: "text"
+              - label: "Autor de la cita"
+                name: "author"
+                widget: "string"
+                required: false
+
+          - label: "Destacado"
+            name: "callout"
+            widget: "object"
+            summary: "Destacado · {{fields.title}}"
+            fields:
+              - label: "Título"
+                name: "title"
+                widget: "string"
+              - label: "Contenido"
+                name: "content"
+                widget: "richtext"
+                buttons: [bold, italic, link, bulleted-list, numbered-list]
+                editor_components: []
+              - label: "Tipo"
+                name: "tone"
+                widget: "select"
+                options: ["informacion", "importante", "naturaleza"]
+                default: "informacion"
+
+          - label: "Botón / enlace"
+            name: "button"
+            widget: "object"
+            summary: "Enlace · {{fields.label}}"
+            fields:
+              - label: "Texto"
+                name: "label"
+                widget: "string"
+              - label: "Enlace"
+                name: "url"
+                widget: "string"
+              - label: "Apertura"
+                name: "target"
+                widget: "select"
+                options: ["misma pestaña", "nueva pestaña"]
+                default: "misma pestaña"
+              - label: "Estilo"
+                name: "style"
+                widget: "select"
+                options: ["principal", "secundario", "texto"]
+                default: "principal"
+
+          - label: "Separador"
+            name: "divider"
+            widget: "object"
+            summary: "Separador"
+            fields:
+              - label: "Estilo"
+                name: "style"
+                widget: "select"
+                options: ["línea", "espacio"]
+                default: "línea"
+
+          - label: "Espacio"
+            name: "spacer"
+            widget: "object"
+            summary: "Espacio vertical"
+            fields:
+              - label: "Tamaño"
+                name: "size"
+                widget: "select"
+                options: ["pequeño", "medio", "grande"]
+                default: "medio"
+
+      - label: "Destacar en portada"
+        name: "featured"
+        widget: "boolean"
+        default: false
+        required: false
+
+      - label: "Enviar en newsletter"
+        name: "newsletter"
+        widget: "boolean"
+        default: false
+        required: false
+        hint: "Marca esta opción para identificar la entrada como candidata para la próxima newsletter."
+
+      - label: "Mostrar compartir"
+        name: "show_share"
+        widget: "boolean"
+        default: true
+        required: false
+
+      - label: "Mostrar comentarios"
+        name: "show_comments"
+        widget: "boolean"
+        default: true
+        required: false
+        hint: "Activa o desactiva los comentarios de esta entrada. Los comentarios públicos usan Giscus/GitHub."
+
+      - label: "SEO"
+        name: "seo"
+        widget: "object"
+        collapsed: true
+        summary: "SEO"
+        required: false
+        fields:
+          - label: "Título SEO"
+            name: "title"
+            widget: "string"
+            required: false
+            hint: "Opcional. Si se deja vacío se utiliza el título de la entrada."
+          - label: "Descripción SEO"
+            name: "description"
+            widget: "text"
+            required: false
+          - label: "No indexar"
+            name: "noindex"
+            widget: "boolean"
+            default: false
+            required: false

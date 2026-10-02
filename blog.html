@@ -1,0 +1,81 @@
+---
+layout: default
+title: Blog
+permalink: /blog/
+wide: true
+stylesheet: blog
+---
+
+<section class="page-hero page-hero--blog">
+  <div class="wrap page-hero-inner">
+    <p class="eyebrow">Diario de campo · Actualidad</p>
+    <h1>Ideas, proyectos<br><em>y experiencias.</em></h1>
+    <p>Historias sobre educación ambiental, residuos, naturaleza, agroecología y las personas que hacen posible el cambio.</p>
+  </div>
+</section>
+
+<section class="blog-listing">
+  <div class="wrap">
+    <div class="listing-topline">
+      <span>{{ site.posts | size }} publicaciones</span>
+      <span class="listing-line"></span>
+      <span>Salud Agroambiental</span>
+    </div>
+
+    {% if site.posts.size > 0 %}
+    <div class="blog-entries">
+      {% for post in site.posts %}
+      <article class="blog-entry">
+        <div class="blog-entry-index" aria-hidden="true">
+          <span>{{ forloop.index | prepend: '0' | slice: -2, 2 }}</span>
+        </div>
+
+        <div class="blog-entry-content">
+          <div class="blog-entry-meta">
+            <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%d · %m · %Y" }}</time>
+            {% if post.categories %}
+              <span class="blog-entry-dot" aria-hidden="true"></span>
+              <span>{{ post.categories | first }}</span>
+            {% endif %}
+            {% if post.featured %}
+              <span class="blog-entry-featured">Destacada</span>
+            {% endif %}
+          </div>
+
+          <h2 class="blog-entry-title">
+            <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+          </h2>
+
+          {% if post.excerpt %}
+          <p class="blog-entry-excerpt">
+            {{ post.excerpt | strip_html | truncatewords: 32 }}
+          </p>
+          {% endif %}
+
+          <a href="{{ post.url | relative_url }}" class="blog-entry-link">
+            <span>Leer artículo</span>
+            <span aria-hidden="true">↗</span>
+          </a>
+        </div>
+
+        <a href="{{ post.url | relative_url }}" class="blog-entry-media" aria-label="Leer {{ post.title }}">
+          {% if post.image %}
+            <img src="{{ post.image | relative_url }}" alt="{{ post.title }}" loading="lazy">
+          {% else %}
+            <div class="image-placeholder">
+              <span>Salud<br>Agroambiental</span>
+            </div>
+          {% endif %}
+        </a>
+      </article>
+      {% endfor %}
+    </div>
+    {% else %}
+      <div class="empty-state">
+        <span class="eyebrow">Próximamente</span>
+        <h2>Estamos preparando<br><em>nuevas historias.</em></h2>
+        <p>El contenido del blog se incorporará aquí cuando terminemos la migración de la web actual.</p>
+      </div>
+    {% endif %}
+  </div>
+</section>

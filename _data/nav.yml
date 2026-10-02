@@ -1,0 +1,20 @@
+- title: Nosotros
+  url: /quienes-somos/
+
+- title: Qué hacemos
+  url: /actividades-proyectos/
+  children:
+    - title: Proyectos y actividades
+      url: /actividades-proyectos/
+    - title: Áreas de trabajo
+      url: /areas-de-trabajo/
+
+- title: Actualidad
+  url: /blog/
+
+- title: Colabora
+  url: /colabora/
+  cta: true
+
+- title: Contacto
+  url: /contacto/

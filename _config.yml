@@ -1,0 +1,64 @@
+title: Salud Agroambiental
+description: >-
+  Salud Agroambiental trabaja por la educación ambiental, la protección del entorno,
+  la gestión responsable de los residuos y una relación más consciente con nuestro territorio.
+url: "https://saludagroambiental.org"
+baseurl: ""
+lang: es
+
+email: saludagroambiental@gmail.com
+twitter_username: SaludAgroambi
+facebook_url: "https://www.facebook.com/saludagroambiental"
+teaming_url: "https://www.teaming.net/saludagroambiental-grupo"
+
+markdown: kramdown
+permalink: /blog/:year/:month/:day/:title/
+
+defaults:
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+      stylesheet: "post"
+      show_comments: true
+  - scope:
+      path: "pages"
+      type: "pages"
+    values:
+      layout: "default"
+      stylesheet: "content"
+
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-seo-tag
+
+exclude:
+  - _drafts
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+  - ADMIN_SETUP.md
+
+newsletter:
+  provider: brevo
+  enabled: false
+  form_url: ""
+  submit_text: "Suscribirme"
+  note: "Al suscribirte aceptas recibir comunicaciones de Salud Agroambiental y nuestra política de privacidad."
+comments:
+  enabled: false
+  repo: "REEMPLAZAR_USUARIO/REPOSITORIO_PUBLICO"
+  repo_id: "REEMPLAZAR_REPO_ID"
+  category: "Comments"
+  category_id: "REEMPLAZAR_CATEGORY_ID"
+  mapping: "pathname"
+  strict: "0"
+  reactions_enabled: "1"
+  emit_metadata: "0"
+  input_position: "bottom"
+  theme_light: "light"
+  theme_dark: "dark_dimmed"
+  lang: "es"
+  loading: "lazy"

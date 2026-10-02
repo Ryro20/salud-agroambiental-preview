@@ -1,0 +1,176 @@
+---
+layout: default
+wide: true
+---
+<article class="post" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="wrap post-wrap">
+    <nav aria-label="Breadcrumb" class="post-breadcrumb">
+      <ol>
+        <li><a href="{{ '/' | relative_url }}">Inicio</a></li>
+        <li><a href="{{ '/blog/' | relative_url }}">Blog</a></li>
+        <li aria-current="page">{{ page.title }}</li>
+      </ol>
+    </nav>
+
+    <header class="post-header">
+      <a href="{{ '/blog/' | relative_url }}" class="post-back">Volver al blog</a>
+      <p class="post-kicker">Salud Agroambiental{% if page.categories %} · {{ page.categories | first }}{% else %} · Actualidad{% endif %}</p>
+      <h1 itemprop="headline">{{ page.title }}</h1>
+      {% if page.excerpt %}
+        <p class="post-deck" itemprop="description">{{ page.excerpt }}</p>
+      {% endif %}
+      <div class="post-meta">
+        <time datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">
+          {{ page.date | date: "%d/%m/%Y" }}
+        </time>
+        {% if page.author %}<span itemprop="author">{{ page.author }}</span>{% endif %}
+        {% if page.modified_date %}<span>Actualizado {{ page.modified_date | date: "%d/%m/%Y" }}</span>{% endif %}
+      </div>
+    </header>
+
+    {% if page.image %}
+      {% assign cover_width = page.image_width | default: 100 %}
+      <figure class="post-cover" style="--post-cover-width: {{ cover_width }}%;">
+        <img class="post-image" src="{{ page.image | relative_url }}" alt="{{ page.image_alt | default: page.title | escape }}" itemprop="image" loading="eager" fetchpriority="high">
+      </figure>
+    {% endif %}
+
+    <div class="post-body-grid">
+      <aside class="post-side" aria-label="Información del artículo">
+        <span>Publicación</span>
+        <strong>{{ page.categories | first | default: 'Actualidad' }}</strong>
+      </aside>
+
+      <div class="post-content" itemprop="articleBody">
+        {% if page.blocks %}
+          {% for block in page.blocks %}
+            {% case block.type %}
+              {% when 'rich-text' %}
+                <div class="post-block post-block--richtext">
+                  {{ block.content | markdownify }}
+                </div>
+
+              {% when 'heading' %}
+                {% assign heading_level = block.level | default: 'H2' | downcase %}
+                {% if heading_level == 'h3' %}
+                  <h3 class="post-block post-block--heading">{{ block.text }}</h3>
+                {% elsif heading_level == 'h4' %}
+                  <h4 class="post-block post-block--heading">{{ block.text }}</h4>
+                {% else %}
+                  <h2 class="post-block post-block--heading">{{ block.text }}</h2>
+                {% endif %}
+
+              {% when 'image' %}
+                {% assign image_width = block.width | default: 100 %}
+                {% assign image_align = block.align | default: 'centro' %}
+                {% assign image_height = block.height | default: 'auto' %}
+                {% assign image_fit = block.fit | default: 'contain' %}
+                <figure class="post-block post-media post-media--{{ image_align }}" style="--post-image-width: {{ image_width }}%;">
+                  <img
+                    src="{{ block.image | relative_url }}"
+                    alt="{{ block.alt | escape }}"
+                    loading="lazy"
+                    style="width:100%;{% if image_height != 'auto' %}height:{{ image_height }};{% endif %}object-fit:{{ image_fit }};"
+                  >
+                  {% if block.caption %}<figcaption>{{ block.caption }}</figcaption>{% endif %}
+                </figure>
+
+              {% when 'gallery' %}
+                <section class="post-block post-gallery-block" aria-label="{{ block.title | default: 'Galería de imágenes' | escape }}">
+                  {% if block.title %}<h3>{{ block.title }}</h3>{% endif %}
+                  {% assign gallery_columns = block.columns | default: '3' %}
+                  <div class="post-gallery post-gallery--{{ gallery_columns }}">
+                    {% for gallery_image in block.images %}
+                      <figure class="post-gallery-item">
+                        {% assign gallery_position = gallery_image.position | default: 'centro' %}
+                        {% case gallery_position %}
+                          {% when 'arriba' %}{% assign gallery_css_position = 'top' %}
+                          {% when 'abajo' %}{% assign gallery_css_position = 'bottom' %}
+                          {% when 'izquierda' %}{% assign gallery_css_position = 'left' %}
+                          {% when 'derecha' %}{% assign gallery_css_position = 'right' %}
+                          {% else %}{% assign gallery_css_position = 'center' %}
+                        {% endcase %}
+                        <img
+                          src="{{ gallery_image.image | relative_url }}"
+                          alt="{{ gallery_image.alt | escape }}"
+                          loading="lazy"
+                          style="object-fit:{{ gallery_image.fit | default: 'cover' }};object-position:{{ gallery_css_position }};"
+                        >
+                        {% if gallery_image.caption %}<figcaption>{{ gallery_image.caption }}</figcaption>{% endif %}
+                      </figure>
+                    {% endfor %}
+                  </div>
+                </section>
+
+              {% when 'media-text' %}
+                {% assign media_width = block.image_width | default: 50 %}
+                <section class="post-block post-media-text post-media-text--{{ block.position | default: 'izquierda' }}" style="--post-media-width: {{ media_width }}%;">
+                  <div class="post-media-text__media">
+                    <img src="{{ block.image | relative_url }}" alt="{{ block.alt | escape }}" loading="lazy">
+                  </div>
+                  <div class="post-media-text__copy">
+                    {% if block.title %}<h3>{{ block.title }}</h3>{% endif %}
+                    {{ block.content | markdownify }}
+                  </div>
+                </section>
+
+              {% when 'quote' %}
+                <figure class="post-block post-quote">
+                  <blockquote>{{ block.text | escape }}</blockquote>
+                  {% if block.author %}<figcaption>— {{ block.author }}</figcaption>{% endif %}
+                </figure>
+
+              {% when 'callout' %}
+                <aside class="post-block post-callout post-callout--{{ block.tone | default: 'informacion' }}">
+                  {% if block.title %}<h3>{{ block.title }}</h3>{% endif %}
+                  {{ block.content | markdownify }}
+                </aside>
+
+              {% when 'button' %}
+                <div class="post-block post-action">
+                  <a class="btn{% case block.style %}{% when 'secundario' %} btn-outline{% when 'texto' %} arrow-link{% else %} btn-primary{% endcase %}" href="{{ block.url }}"{% if block.target == 'nueva pestaña' %} target="_blank" rel="noopener noreferrer"{% endif %}>
+                    {{ block.label }} <span aria-hidden="true">→</span>
+                  </a>
+                </div>
+
+              {% when 'divider' %}
+                {% if block.style == 'espacio' %}
+                  <div class="post-block post-spacer post-spacer--medium" aria-hidden="true"></div>
+                {% else %}
+                  <hr class="post-block post-divider">
+                {% endif %}
+
+              {% when 'spacer' %}
+                {% if block.size == 'pequeño' %}
+                  <div class="post-block post-spacer post-spacer--small" aria-hidden="true"></div>
+                {% elsif block.size == 'grande' %}
+                  <div class="post-block post-spacer post-spacer--large" aria-hidden="true"></div>
+                {% else %}
+                  <div class="post-block post-spacer post-spacer--medium" aria-hidden="true"></div>
+                {% endif %}
+            {% endcase %}
+          {% endfor %}
+        {% else %}
+          {{ content }}
+        {% endif %}
+      </div>
+    </div>
+
+    {% if page.show_share != false %}{% include share.html %}{% endif %}
+    {% if page.show_comments %}{% include comments.html %}{% endif %}
+  </div>
+</article>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": {{ page.title | jsonify }},
+  "description": {{ page.excerpt | strip_html | jsonify }},
+  "datePublished": {{ page.date | date_to_xmlschema | jsonify }},
+  "dateModified": {% if page.modified_date %}{{ page.modified_date | date_to_xmlschema | jsonify }}{% else %}{{ page.date | date_to_xmlschema | jsonify }}{% endif %},
+  "author": {"@type": "Organization", "name": {{ site.title | jsonify }}},
+  "publisher": {"@type": "Organization", "name": {{ site.title | jsonify }}, "logo": {"@type": "ImageObject", "url": {{ '/assets/img/logo.png' | absolute_url | jsonify }}}}{% if page.image %},
+  "image": {{ page.image | absolute_url | jsonify }}{% endif %}
+}
+</script>

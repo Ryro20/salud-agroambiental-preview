@@ -1,0 +1,56 @@
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="{{ '/' | relative_url }}" class="footer-logo-link" aria-label="Volver al inicio">
+          <picture class="logo-footer-picture">
+            <source type="image/webp" srcset="{{ '/assets/img/logo-320.webp' | relative_url }} 320w, {{ '/assets/img/logo-640.webp' | relative_url }} 640w, {{ '/assets/img/logo.webp' | relative_url }} 1024w" sizes="58px">
+            <img src="{{ '/assets/img/logo.png' | relative_url }}" alt="{{ site.title }}" class="logo-footer">
+          </picture>
+        </a>
+        <p class="footer-statement">El cuidado del entorno empieza cuando entendemos que <em>formamos parte de él.</em></p>
+      </div>
+
+      <div class="footer-contact">
+        <span class="footer-label">Hablemos</span>
+        <a href="mailto:{{ site.email }}" class="footer-email">{{ site.email }}</a>
+        <nav aria-label="Redes sociales" class="footer-social">
+          <a href="{{ site.facebook_url }}" target="_blank" rel="noopener noreferrer" aria-label="Facebook">Facebook</a>
+          <a href="https://twitter.com/{{ site.twitter_username }}" target="_blank" rel="noopener noreferrer" aria-label="Twitter / X">X</a>
+        </nav>
+      </div>
+
+      <div class="footer-cta">
+        <span class="footer-label">Participa</span>
+        <p>Conoce nuestros proyectos y encuentra tu forma de colaborar.</p>
+        <a href="{{ '/colabora/' | relative_url }}" class="footer-arrow-link">Quiero participar <span aria-hidden="true">↗</span></a>
+      </div>
+    </div>
+
+    <div class="footer-nav">
+      <div>
+        <span>Explorar</span>
+        <a href="{{ '/quienes-somos/' | relative_url }}">Quiénes somos</a>
+        <a href="{{ '/actividades-proyectos/' | relative_url }}">Qué hacemos</a>
+        <a href="{{ '/blog/' | relative_url }}">Blog</a>
+      </div>
+      <div>
+        <span>Colabora</span>
+        <a href="{{ '/colabora/' | relative_url }}">Participa</a>
+        <a href="{{ '/colabora/#unete' | relative_url }}">Hazte socio/a</a>
+        <a href="{{ '/colabora/#donacion' | relative_url }}">Donación</a>
+      </div>
+      <div>
+        <span>Información</span>
+        <a href="{{ '/contacto/' | relative_url }}">Contacto</a>
+        <a href="{{ '/aviso-legal/' | relative_url }}">Aviso legal</a>
+        <a href="{{ '/politica-de-privacidad/' | relative_url }}">Privacidad</a>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>© {{ 'now' | date: "%Y" }} {{ site.title }}</p>
+      <p>Hecho para cuidar lo que nos rodea.</p>
+    </div>
+  </div>
+</footer>

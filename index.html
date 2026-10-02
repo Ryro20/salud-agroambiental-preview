@@ -1,0 +1,163 @@
+---
+layout: default
+title: Inicio
+wide: true
+stylesheet: home
+---
+
+<section class="home-hero">
+  <div class="wrap home-hero-grid">
+    <div class="home-hero-copy">
+      <p class="eyebrow">Salud · Medio ambiente · Comunidad</p>
+      <h1>Cuidar el entorno también es <em>cuidarnos.</em></h1>
+      <p class="hero-lead">Somos una asociación sin ánimo de lucro dedicada a la educación ambiental, la gestión responsable de los residuos y la protección de nuestro entorno.</p>
+      <div class="hero-actions">
+        <a href="{{ '/quienes-somos/' | relative_url }}" class="btn btn-primary">Conócenos <span aria-hidden="true">→</span></a>
+        <a href="{{ '/blog/' | relative_url }}" class="text-link">Leer el blog <span aria-hidden="true">↗</span></a>
+      </div>
+    </div>
+
+    <div class="home-hero-art" aria-hidden="true">
+      <div class="hero-orbit hero-orbit--one"></div>
+      <div class="hero-orbit hero-orbit--two"></div>
+      <div class="hero-leaf hero-leaf--one"></div>
+      <div class="hero-leaf hero-leaf--two"></div>
+      <div class="hero-logo-frame">
+        <picture>
+          <source type="image/webp" srcset="{{ '/assets/img/logo-320.webp' | relative_url }} 320w, {{ '/assets/img/logo-640.webp' | relative_url }} 640w, {{ '/assets/img/logo.webp' | relative_url }} 1024w" sizes="(max-width:600px) 180px, 280px">
+          <img src="{{ '/assets/img/logo.png' | relative_url }}" alt="Salud Agroambiental">
+        </picture>
+      </div>
+      <span class="hero-art-label">Desde el cuidado · hacia el cambio</span>
+    </div>
+  </div>
+</section>
+
+<section class="intro-section">
+  <div class="wrap intro-grid">
+    <p class="section-index">01 / Nosotros</p>
+    <div>
+      <h2>No podemos hacerlo todo.<br><em>Pero todos podemos hacer algo.</em></h2>
+      <p>Trabajamos para acercar la educación ambiental a personas, centros educativos y comunidades, convirtiendo la conciencia en pequeñas acciones que tienen un impacto real.</p>
+      <a href="{{ '/quienes-somos/#filosofia' | relative_url }}" class="arrow-link">Conoce nuestra filosofía <span aria-hidden="true">→</span></a>
+    </div>
+  </div>
+</section>
+
+<section class="featured-section">
+  <div class="wrap">
+    <div class="section-heading">
+      <div>
+        <p class="eyebrow">Actualidad</p>
+        <h2>Historias que merecen ser contadas.</h2>
+      </div>
+      <a href="{{ '/blog/' | relative_url }}" class="arrow-link">Ver todas <span aria-hidden="true">→</span></a>
+    </div>
+
+    {% assign featured = site.posts | first %}
+    {% if featured %}
+    <article class="featured-post">
+      <a href="{{ featured.url | relative_url }}" class="featured-post-media">
+        {% if featured.image %}
+          <img src="{{ featured.image | relative_url }}" alt="{{ featured.title }}" loading="lazy">
+        {% else %}
+          <div class="image-placeholder image-placeholder--large"><span>Salud Agroambiental</span></div>
+        {% endif %}
+      </a>
+      <div class="featured-post-copy">
+        <p class="post-label">{{ featured.date | date: "%d · %m · %Y" }}</p>
+        <h3><a href="{{ featured.url | relative_url }}">{{ featured.title }}</a></h3>
+        <p>{{ featured.excerpt | strip_html | truncatewords: 35 }}</p>
+        <a href="{{ featured.url | relative_url }}" class="arrow-link">Leer historia <span aria-hidden="true">→</span></a>
+      </div>
+    </article>
+    {% endif %}
+  </div>
+</section>
+
+<section class="stories-section">
+  <div class="wrap">
+    <div class="section-heading section-heading--compact">
+      <div>
+        <p class="eyebrow">Publicaciones</p>
+        <h2>Desde nuestro día a día.</h2>
+      </div>
+    </div>
+
+    {% if site.posts.size > 1 %}
+    <div class="post-grid-modern">
+      {% for post in site.posts offset:1 limit:6 %}
+      <article class="post-card">
+        <a href="{{ post.url | relative_url }}" class="post-card-image">
+          {% if post.image %}
+            <img src="{{ post.image | relative_url }}" alt="{{ post.title }}" loading="lazy">
+          {% else %}
+            <div class="image-placeholder"><span>Salud Agroambiental</span></div>
+          {% endif %}
+        </a>
+        <div class="post-card-body">
+          <p class="post-card-meta">{{ post.date | date: "%d · %m · %Y" }}</p>
+          <h3 class="post-card-title"><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
+          <p class="post-card-excerpt">{{ post.excerpt | strip_html | truncatewords: 18 }}</p>
+          <a href="{{ post.url | relative_url }}" class="card-arrow" aria-label="Leer {{ post.title }}">↗</a>
+        </div>
+      </article>
+      {% endfor %}
+    </div>
+    {% else %}
+      <div class="empty-state empty-state--home">
+        <p class="eyebrow">Archivo en preparación</p>
+        <h3>El nuevo espacio editorial<br><em>está tomando forma.</em></h3>
+        <a href="{{ '/blog/' | relative_url }}" class="arrow-link">Visitar el blog <span aria-hidden="true">→</span></a>
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+<section class="areas-section">
+  <div class="wrap">
+    <div class="section-heading section-heading--light">
+      <div>
+        <p class="eyebrow">02 / Qué hacemos</p>
+        <h2>Pequeñas acciones.<br><em>Un entorno más vivo.</em></h2>
+      </div>
+      <p>Explora las áreas desde las que trabajamos para construir una relación más responsable con nuestro entorno.</p>
+    </div>
+
+    <div class="areas-grid">
+      <a href="{{ '/areas-de-trabajo/#reciclaje' | relative_url }}" class="area-card area-card--featured">
+        <span class="area-number">01</span>
+        <h3>Residuos<br>y reciclaje</h3>
+        <span class="area-arrow">↗</span>
+      </a>
+      <a href="{{ '/areas-de-trabajo/#educacion' | relative_url }}" class="area-card">
+        <span class="area-number">02</span>
+        <h3>Educación<br>ambiental</h3>
+        <span class="area-arrow">↗</span>
+      </a>
+      <a href="{{ '/areas-de-trabajo/#animales' | relative_url }}" class="area-card">
+        <span class="area-number">03</span>
+        <h3>Animales<br>y naturaleza</h3>
+        <span class="area-arrow">↗</span>
+      </a>
+      <a href="{{ '/areas-de-trabajo/#agroecologia' | relative_url }}" class="area-card">
+        <span class="area-number">04</span>
+        <h3>Agroecología</h3>
+        <span class="area-arrow">↗</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="participate-section">
+  <div class="wrap participate-box">
+    <div>
+      <p class="eyebrow">03 / Colabora</p>
+      <h2>El cambio necesita<br><em>personas.</em></h2>
+    </div>
+    <div class="participate-copy">
+      <p>Puedes colaborar como socio/a, voluntario/a, difundiendo nuestro trabajo o participando en las actividades que organizamos.</p>
+      <a href="{{ '/colabora/' | relative_url }}" class="btn btn-dark">Descubre cómo participar <span aria-hidden="true">→</span></a>
+    </div>
+  </div>
+</section>

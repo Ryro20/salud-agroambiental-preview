@@ -1,0 +1,67 @@
+---
+layout: post
+title: "Demo del editor"
+date: 2030-01-01 12:00:00 +0100
+excerpt: "Entrada interna para comprobar visualmente todos los bloques disponibles en el panel."
+categories:
+  - Actualidad
+author: "Salud Agroambiental"
+image: /assets/img/blog/img_1.jpg
+image_alt: "Imagen de prueba"
+featured: false
+newsletter: false
+show_share: false
+show_comments: false
+seo:
+  noindex: true
+blocks:
+  - type: rich-text
+    content: |
+      Texto enriquecido de prueba con **negrita**, *cursiva*, enlaces y listas.
+  - type: heading
+    level: H2
+    text: "Un encabezado de sección"
+  - type: image
+    image: /assets/img/blog/img_1.jpg
+    alt: "Imagen de prueba"
+    caption: "Pie de foto de prueba"
+    size: normal
+    align: centro
+  - type: gallery
+    title: "Galería de prueba"
+    columns: "3"
+    images:
+      - image: /assets/img/blog/img_1.jpg
+        alt: "Primera imagen de prueba"
+        caption: "Primera imagen"
+      - image: /assets/img/blog/img_1.jpg
+        alt: "Segunda imagen de prueba"
+        caption: "Segunda imagen"
+      - image: /assets/img/blog/img_1.jpg
+        alt: "Tercera imagen de prueba"
+        caption: "Tercera imagen"
+  - type: media-text
+    image: /assets/img/blog/img_1.jpg
+    alt: "Imagen de prueba junto a texto"
+    title: "Imagen y texto"
+    content: |
+      Este bloque permite colocar una imagen a la izquierda o a la derecha.
+    position: derecha
+  - type: quote
+    text: "Una frase destacada puede romper el ritmo del artículo."
+    author: "Salud Agroambiental"
+  - type: callout
+    title: "Información importante"
+    content: |
+      Este es un bloque destacado para avisos o contexto adicional.
+    tone: informacion
+  - type: button
+    label: "Visitar contacto"
+    url: /contacto/
+    target: "misma pestaña"
+    style: principal
+  - type: divider
+    style: línea
+  - type: spacer
+    size: grande
+---

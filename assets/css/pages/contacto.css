@@ -1,0 +1,92 @@
+
+
+.contact-page { overflow: clip; }
+
+.contact-hero {
+  padding: clamp(82px, 10vw, 140px) 0 105px;
+  background: var(--paper, var(--surface));
+  border-bottom: 1px solid var(--line);
+}
+
+.contact-hero-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(300px, .75fr);
+  gap: clamp(45px, 8vw, 90px);
+  align-items: end;
+}
+
+.contact-hero h1 {
+  max-width: 820px;
+  margin: 14px 0 23px;
+  color: var(--ink);
+  font: clamp(3.8rem, 7vw, 7rem)/.85 var(--display);
+  letter-spacing: -.025em;
+}
+
+.contact-hero p:not(.eyebrow) { max-width: 650px; color: var(--muted); }
+
+.contact-direct {
+  padding: 30px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+}
+
+.contact-direct span,
+.contact-details span {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--muted);
+  font-size: .62rem;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+.contact-direct a {
+  display: block;
+  color: var(--ink);
+  font: clamp(1.45rem, 2.3vw, 2.4rem)/1.1 var(--display);
+  overflow-wrap: anywhere;
+  text-decoration: none;
+}
+
+.contact-direct a:hover { color: var(--green); }
+.contact-direct small { display: block; margin-top: 12px; color: var(--muted); }
+
+.contact-body { padding: 100px 0; background: var(--surface-alt); }
+
+.contact-body-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(320px, 1fr);
+  gap: clamp(50px, 8vw, 90px);
+  align-items: start;
+}
+
+.contact-body h2 {
+  margin: 8px 0 16px;
+  color: var(--ink);
+  font: clamp(2.8rem, 5vw, 5rem)/.9 var(--display);
+}
+
+.contact-body p { max-width: 520px; color: var(--muted); }
+.contact-details { overflow: hidden; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); }
+.contact-details div { padding: 23px 25px; border-bottom: 1px solid var(--line); }
+.contact-details div:last-child { border-bottom: 0; }
+.contact-details a { color: var(--ink); font-weight: 700; overflow-wrap: anywhere; text-decoration: none; }
+.contact-details a:hover { color: var(--green); }
+
+@media (max-width: 850px) {
+  .contact-hero-grid,
+  .contact-body-grid { grid-template-columns: 1fr; }
+  .contact-hero-grid { gap: 35px; }
+  .contact-body-grid { gap: 50px; }
+}
+
+@media (max-width: 600px) {
+  .contact-hero { padding: 65px 0 75px; }
+  .contact-hero h1 { font-size: clamp(3.4rem, 15vw, 5.2rem); }
+  .contact-body { padding: 72px 0; }
+  .contact-direct { padding: 25px; }
+}

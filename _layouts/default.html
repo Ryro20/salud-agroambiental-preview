@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="{{ site.lang }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#183b2a" id="theme-color">
+  <script>
+    (function () {
+      try {
+        var saved = localStorage.getItem('sa-theme');
+        var dark = saved === 'dark' || (!saved && window.matchMedia('(prefers-color-scheme: dark)').matches);
+        if (dark) document.documentElement.setAttribute('data-theme', 'dark');
+      } catch (e) {}
+    })();
+  </script>
+  {% assign meta_description = page.seo.description | default: page.description | default: page.excerpt | default: site.description %}
+  {% assign meta_title = page.seo.title | default: page.title %}
+  <meta name="description" content="{{ meta_description | strip_html | escape }}">
+  {% if page.seo.noindex %}<meta name="robots" content="noindex,nofollow">{% endif %}
+  <title>{% if meta_title %}{{ meta_title }} · {% endif %}{{ site.title }}</title>
+
+  <meta property="og:type" content="{% if page.layout == 'post' %}article{% else %}website{% endif %}">
+  <meta property="og:url" content="{{ page.url | absolute_url }}">
+  <meta property="og:title" content="{% if meta_title %}{{ meta_title }} · {% endif %}{{ site.title }}">
+  <meta property="og:description" content="{{ meta_description | strip_html | escape }}">
+  {% if page.image %}
+    <meta property="og:image" content="{{ page.image | absolute_url }}">
+  {% endif %}
+
+  <meta name="twitter:card" content="summary_large_image">
+  {% if site.twitter_username %}
+    <meta name="twitter:creator" content="@{{ site.twitter_username }}">
+  {% endif %}
+
+  <link rel="canonical" href="{{ page.url | absolute_url }}">
+
+  {% seo %}
+  {% feed_meta %}
+
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display:ital@0;1&display=swap" as="style">
+  <link rel="preload" href="{{ '/assets/css/variables.css' | relative_url }}" as="style">
+
+  <link rel="stylesheet" href="{{ '/assets/css/variables.css' | relative_url }}">
+  <link rel="stylesheet" href="{{ '/assets/css/global.css' | relative_url }}">
+  {% assign page_stylesheet = page.stylesheet | default: 'content' %}
+  <link rel="stylesheet" href="{{ '/assets/css/pages/' | append: page_stylesheet | append: '.css' | relative_url }}">
+</head>
+<body>
+  {% include header.html %}
+  <main class="site-content{% if page.wide %} site-content--wide{% endif %}">
+    {% if page.wide %}
+      {{ content }}
+    {% else %}
+      <div class="page-content">
+        <div class="page-content-grid">
+          <aside class="page-aside" aria-hidden="true">
+            <span>{{ page.title }}</span>
+            <i></i>
+          </aside>
+          <div class="page-main">{{ content }}</div>
+        </div>
+      </div>
+    {% endif %}
+  </main>
+  {% include newsletter.html %}
+  {% include footer.html %}
+  <script src="{{ '/assets/js/main.js' | relative_url }}"></script>
+</body>
+</html>

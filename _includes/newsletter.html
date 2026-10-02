@@ -1,0 +1,32 @@
+{% assign newsletter = site.newsletter %}
+<section class="newsletter" aria-labelledby="newsletter-title">
+  <div class="wrap newsletter-inner">
+    <div>
+      <p class="eyebrow">Newsletter</p>
+      <h2 id="newsletter-title">Lo que hacemos, directamente en tu correo.</h2>
+      {% if newsletter.enabled and newsletter.form_url %}
+        <p>Recibe novedades, actividades y nuevas publicaciones de Salud Agroambiental.</p>
+      {% else %}
+        <p>Estamos preparando el servicio de newsletter. La suscripción estará disponible cuando configuremos el formulario.</p>
+      {% endif %}
+    </div>
+
+    {% if newsletter.enabled and newsletter.form_url %}
+      <form class="newsletter-form" action="{{ newsletter.form_url }}" method="post" target="_blank">
+        <div class="newsletter-fields">
+          <label class="sr-only" for="newsletter-email">Correo electrónico</label>
+          <input id="newsletter-email" name="email" type="email" autocomplete="email" placeholder="Tu correo electrónico" required>
+          <button class="btn btn-primary" type="submit">{{ newsletter.submit_text | default: 'Suscribirme' }}</button>
+        </div>
+        <p class="newsletter-note">{{ newsletter.note }} <a href="{{ '/politica-de-privacidad/' | relative_url }}">Privacidad</a>.</p>
+      </form>
+    {% else %}
+      <div class="newsletter-form is-disabled" aria-label="Newsletter pendiente de configuración">
+        <div class="newsletter-fields">
+          <input type="email" placeholder="Tu correo electrónico" disabled aria-disabled="true">
+          <button class="btn btn-primary" type="button" disabled>Próximamente</button>
+        </div>
+      </div>
+    {% endif %}
+  </div>
+</section>
