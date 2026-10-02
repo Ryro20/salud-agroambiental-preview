@@ -11,11 +11,14 @@
       return;
     }
 
+    const siteBaseUrl = new URL('../', window.location.href);
+    const siteAssetUrl = (path) => new URL(path, siteBaseUrl).href;
+
     if (!document.querySelector('link[data-salbi-admin-theme]')) {
       const themeLink = document.createElement('link');
 
       themeLink.rel = 'stylesheet';
-      themeLink.href = './admin.css';
+      themeLink.href = siteAssetUrl('admin/admin.css');
       themeLink.dataset.salbiAdminTheme = 'true';
 
       document.head.appendChild(themeLink);
@@ -303,19 +306,19 @@
     );
 
     CMS.registerPreviewStyle(
-      '/assets/css/variables.css'
+      siteAssetUrl('assets/css/variables.css')
     );
 
     CMS.registerPreviewStyle(
-      '/assets/css/global.css'
+      siteAssetUrl('assets/css/global.css')
     );
 
     CMS.registerPreviewStyle(
-      '/assets/css/pages/post.css'
+      siteAssetUrl('assets/css/pages/post.css')
     );
 
     CMS.registerPreviewStyle(
-      '/admin/preview.css'
+      siteAssetUrl('admin/preview.css')
     );
 
     const PostPreview = createClass({
@@ -1126,7 +1129,7 @@
                 'img',
                 {
                   src:
-                    '/assets/img/logo.png',
+                    siteAssetUrl('assets/img/logo.png'),
 
                   alt:
                     'Salud Agroambiental',

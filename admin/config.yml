@@ -29,7 +29,7 @@ slug:
   sanitize_replacement: "-"
 
 logo:
-  src: "/assets/img/logo.png"
+  src: "../assets/img/logo.png"
   show_in_header: true
 
 collections:
