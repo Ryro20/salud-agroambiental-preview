@@ -48,8 +48,8 @@ newsletter:
   submit_text: "Suscribirme"
   note: "Al suscribirte aceptas recibir comunicaciones de Salud Agroambiental y nuestra política de privacidad."
 comments:
-  enabled: false
-  repo: "REEMPLAZAR_USUARIO/REPOSITORIO_PUBLICO"
+  enabled: true
+  repo: "https://github.com/Ryro20/salud-agroambiental-preview"
   repo_id: "REEMPLAZAR_REPO_ID"
   category: "Comments"
   category_id: "REEMPLAZAR_CATEGORY_ID"
