@@ -3,11 +3,10 @@
 
   function boot() {
     const CMS = window.CMS;
-    const initCMS = window.initCMS;
     const h = window.h;
     const createClass = window.createClass;
 
-    if (!CMS || !initCMS || !h || !createClass) {
+    if (!CMS || !h || !createClass) {
       console.error('Decap CMS no está disponible.');
       return;
     }
@@ -1546,7 +1545,8 @@
       );
     }
 
-    initCMS();
+    CMS.init();
+    console.log('Decap CMS inicializado de forma segura.');
   }
 
   if (
