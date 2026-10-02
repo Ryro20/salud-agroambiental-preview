@@ -7,10 +7,10 @@ search: true
 publish_mode: simple
 
 backend:
-  name: test-repo
-  repo: REEMPLAZAR_USUARIO/salud-agroambiental
+  name: git-gateway
+  repo: https://github.com/Ryro20/salud-agroambiental-preview
   branch: main
-  base_url: https://REEMPLAZAR-POR-TU-PROXY.workers.dev
+  base_url: https://salud-agroambiental-preview.vercel.app/
   auth_endpoint: /auth
   use_graphql: true
   commit_messages:
