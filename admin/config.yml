@@ -12,6 +12,7 @@ backend:
   branch: main
   base_url: https://salud-agroambiental-preview.vercel.app
   auth_endpoint: /callback
+  site_id: ryro20.github.io
   use_graphql: true
   commit_messages:
     create: 'Crear entrada "{{slug}}"'
