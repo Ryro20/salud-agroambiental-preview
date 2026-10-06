@@ -18,7 +18,7 @@
       const themeLink = document.createElement('link');
 
       themeLink.rel = 'stylesheet';
-      themeLink.href = siteAssetUrl('admin/admin.css?v=5');
+      themeLink.href = siteAssetUrl('admin/admin.css?v=6');
       themeLink.dataset.salbiAdminTheme = 'true';
 
       document.head.appendChild(themeLink);
@@ -1501,6 +1501,76 @@
       document.querySelectorAll(
         '[data-admin-close]'
       );
+
+    const cmsRoot = document.querySelector('#nc-root');
+
+    function translateAddButtons(node) {
+      if (!cmsRoot || !node) {
+        return;
+      }
+
+      if (node.nodeType === Node.TEXT_NODE) {
+        translateAddButtons(node.parentElement);
+        return;
+      }
+
+      if (node.nodeType !== Node.ELEMENT_NODE) {
+        return;
+      }
+
+      const candidates = [];
+
+      if (
+        node.matches('button, [role="button"]') &&
+        cmsRoot.contains(node)
+      ) {
+        candidates.push(node);
+      }
+
+      candidates.push(
+        ...node.querySelectorAll('button, [role="button"]')
+      );
+
+      candidates.forEach(function (element) {
+        Array.from(element.childNodes).forEach(function (child) {
+          if (child.nodeType !== Node.TEXT_NODE) {
+            return;
+          }
+
+          const match = child.nodeValue.match(/^(\s*)Add\s+(.+)$/);
+
+          if (match) {
+            child.nodeValue = match[1] + 'Añadir ' + match[2];
+          }
+        });
+      });
+    }
+
+    if (cmsRoot) {
+      translateAddButtons(cmsRoot);
+
+      const addButtonObserver = new MutationObserver(
+        function (mutations) {
+          mutations.forEach(function (mutation) {
+            if (mutation.type === 'characterData') {
+              translateAddButtons(mutation.target.parentElement);
+              return;
+            }
+
+            mutation.addedNodes.forEach(translateAddButtons);
+          });
+        }
+      );
+
+      addButtonObserver.observe(
+        cmsRoot,
+        {
+          childList: true,
+          characterData: true,
+          subtree: true
+        }
+      );
+    }
 
     if (
       helpButton &&

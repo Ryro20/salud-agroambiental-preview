@@ -255,6 +255,39 @@ body:has(#nc-root section[class*="AuthenticationPage"]) #nc-root section[class*=
 [class*="ImageControl"] button:hover {
   background-color: var(--sa-green-soft);
 }
+[class*="ListControl"] [role="button"][aria-haspopup="true"] {
+  min-height: 44px;
+  padding: 10px 14px;
+  border: 1px solid #cbd9cd;
+  border-radius: 10px;
+  background: var(--sa-green-soft);
+  color: var(--sa-green-dark);
+  font-size: .88rem;
+  font-weight: 700;
+  transition: background-color .18s ease, border-color .18s ease, box-shadow .18s ease;
+}
+[class*="ListControl"] [role="button"][aria-haspopup="true"]:hover {
+  border-color: #a9c3ad;
+  background: #dcebdd;
+}
+[class*="ListControl"] [role="button"][aria-haspopup="true"]:focus-visible {
+  box-shadow: 0 0 0 3px rgba(47,108,80,.14);
+}
+[role="menu"] {
+  overflow: hidden;
+  border: 1px solid var(--sa-line) !important;
+  border-radius: 12px !important;
+  box-shadow: 0 12px 32px rgba(23,61,45,.16) !important;
+}
+[role="menuitem"] {
+  min-height: 44px;
+  padding: 11px 14px !important;
+}
+[role="menuitem"]:hover,
+[role="menuitem"]:focus {
+  background: var(--sa-green-soft) !important;
+  color: var(--sa-green-dark) !important;
+}
 [class*="EditorControlPane"] [class*="Toolbar"] {
   border: 1px solid var(--sa-line);
   border-radius: 12px 12px 0 0;
@@ -327,6 +360,23 @@ body:has(#nc-root section[class*="AuthenticationPage"]) #nc-root section[class*=
   }
 
   #nc-root [class*="EditorControlPane"] { min-width: 0; }
+  #nc-root [class*="EditorContainer"] {
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+  #nc-root .SplitPane {
+    width: 100% !important;
+    min-width: 0 !important;
+    flex-direction: column !important;
+  }
+  #nc-root .SplitPane > .Pane1,
+  #nc-root .SplitPane > .Pane2 {
+    position: relative !important;
+    width: 100% !important;
+    height: 50% !important;
+    flex: 0 0 50% !important;
+  }
+  #nc-root .SplitPane > .Resizer { display: none !important; }
   #nc-root [class*="ControlPane"] input:not([type="checkbox"]):not([type="radio"]):not([type="range"]),
   #nc-root [class*="ControlPane"] textarea,
   #nc-root [class*="ControlPane"] select { max-width: 100%; }
@@ -337,6 +387,7 @@ body:has(#nc-root section[class*="AuthenticationPage"]) #nc-root section[class*=
   [class*="ControlPane"] input,
   [class*="ControlPane"] textarea,
   [class*="ControlPane"] select,
+  [class*="ListControl"] [role="button"][aria-haspopup="true"],
   body:has(#nc-root section[class*="AuthenticationPage"]) #nc-root section[class*="AuthenticationPage"] > button {
     transition: none;
   }
