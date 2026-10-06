@@ -76,6 +76,8 @@
   transition: background-color var(--ease);
 }
 
+.blog-entry[hidden] { display: none; }
+
 .blog-entry::before {
   position: absolute;
   inset: 0 -24px;
@@ -167,6 +169,19 @@
 .blog-entry-media .image-placeholder { height: 100%; min-height: 188px; }
 
 .empty-state h2 { margin-top: 10px; color: var(--ink); }
+
+.blog-pagination {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 38px;
+}
+
+.blog-pagination[hidden] { display: none; }
+.blog-pagination > span { min-width: 190px; color: var(--muted); font-size: .82rem; text-align: center; }
+.blog-pagination button:disabled { opacity: .5; cursor: not-allowed; transform: none; }
 
 @media (max-width: 900px) {
   .blog-entry {

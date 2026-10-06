@@ -23,11 +23,11 @@ stylesheet: blog
     </div>
 
     {% if site.posts.size > 0 %}
-    <div class="blog-entries">
+    <div class="blog-entries" id="blog-entries">
       {% for post in site.posts %}
       <article class="blog-entry">
         <div class="blog-entry-index" aria-hidden="true">
-          <span>{{ forloop.index | prepend: '0' | slice: -2, 2 }}</span>
+          <span>{% if forloop.index < 10 %}0{% endif %}{{ forloop.index }}</span>
         </div>
 
         <div class="blog-entry-content">
@@ -70,6 +70,13 @@ stylesheet: blog
       </article>
       {% endfor %}
     </div>
+    {% if site.posts.size > 12 %}
+    <nav class="blog-pagination" aria-label="Paginación del blog" data-blog-pagination data-page-size="12" aria-controls="blog-entries" hidden>
+      <button class="btn btn-outline" type="button" data-blog-previous disabled>Anterior</button>
+      <span data-blog-pagination-status role="status" aria-live="polite"></span>
+      <button class="btn btn-primary" type="button" data-blog-next>Siguiente</button>
+    </nav>
+    {% endif %}
     {% else %}
       <div class="empty-state">
         <span class="eyebrow">Próximamente</span>
@@ -79,3 +86,4 @@ stylesheet: blog
     {% endif %}
   </div>
 </section>
+<script src="{{ '/assets/js/blog-pagination.js' | relative_url }}"></script>

@@ -12,7 +12,7 @@ facebook_url: "https://www.facebook.com/saludagroambiental"
 teaming_url: "https://www.teaming.net/saludagroambiental-grupo"
 
 markdown: kramdown
-permalink: /blog/:year/:month/:day/:title/
+permalink: /:year/:month/:day/:title/
 
 defaults:
   - scope:
