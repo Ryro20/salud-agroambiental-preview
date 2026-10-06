@@ -40,6 +40,7 @@ exclude:
   - Gemfile.lock
   - README.md
   - ADMIN_SETUP.md
+  - scripts
 
 newsletter:
   provider: brevo
@@ -48,17 +49,10 @@ newsletter:
   submit_text: "Suscribirme"
   note: "Al suscribirte aceptas recibir comunicaciones de Salud Agroambiental y nuestra política de privacidad."
 comments:
-  enabled: true
-  repo: "https://github.com/Ryro20/salud-agroambiental-preview"
-  repo_id: "REEMPLAZAR_REPO_ID"
-  category: "Comments"
-  category_id: "REEMPLAZAR_CATEGORY_ID"
-  mapping: "pathname"
-  strict: "0"
-  reactions_enabled: "1"
-  emit_metadata: "0"
-  input_position: "bottom"
-  theme_light: "light"
-  theme_dark: "dark_dimmed"
-  lang: "es"
-  loading: "lazy"
+  provider: firebase
+  enabled: false
+  api_key: ""
+  auth_domain: ""
+  project_id: ""
+  app_id: ""
+  collection: "comments"

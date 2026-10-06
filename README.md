@@ -80,15 +80,29 @@ La carpeta `_site/` contiene la web ya generada. No hace falta subirla: GitHub A
 
 ## Panel de administración
 
-El panel está en `/admin/`, pero todavía no está listo para guardar cambios en GitHub: su configuración usa valores de ejemplo y el backend de pruebas de Decap CMS.
+El panel editorial está en `/admin/` y usa Decap CMS para editar entradas del repositorio. La autenticación OAuth ya está desplegada; no publiques secretos ni contraseñas en el repositorio ni en `admin/config.yml`.
 
-Antes de usarlo para publicar entradas hay que configurar el repositorio correcto y la autenticación OAuth del CMS. No pongas secretos ni contraseñas en `admin/config.yml`; la autenticación debe configurarse siguiendo el método seguro que se elija para el proyecto.
+Los cambios de una entrada no se escriben en GitHub hasta que se confirma su publicación. Comprueba el mensaje de cambios guardados antes de salir del editor.
 
 ## Funciones aún pendientes
 
-- El formulario de newsletter está desactivado hasta conectar el servicio y su formulario.
-- Los comentarios están desactivados hasta completar la configuración de Giscus.
+- El formulario de newsletter permanece desactivado en `_config.yml` hasta crear y probar un formulario de suscripción de Brevo. No basta con activar `newsletter.enabled`: el endpoint y los nombres de campos deben corresponder al formulario real. Antes de recopilar correos, completa y revisa la política de privacidad, el consentimiento y la baja de suscripción.
+- Los comentarios usan una integración propia preparada con Firebase Authentication (proveedor Google) y Cloud Firestore. Sigue desactivada en `_config.yml`; para prepararla, crea un proyecto Firebase en el plan Spark, habilita Google en Authentication, crea Firestore y añade el dominio publicado a los dominios autorizados de Authentication. Despliega las reglas y el índice con `firebase deploy --only firestore:rules,firestore:indexes`, y copia `apiKey`, `authDomain`, `projectId` y `appId` de la app web de Firebase a `site.comments` en `_config.yml`. Son valores de configuración públicos, no secretos; la protección de datos depende de `firestore.rules`. Antes de poner `comments.enabled: true`, completa y revisa la política de privacidad. Los comentarios se publican inmediatamente y el nombre de Google y el texto son públicos. Los documentos públicos de comentarios no guardan el correo ni el UID, pero Firebase Authentication procesa la cuenta de Google para iniciar sesión. Solo se permite crear comentarios con Google autenticado; la eliminación/moderación se hace desde Firebase Console. El inicio de sesión reduce el spam, pero no lo elimina. Las cuotas gratuitas de Firestore incluyen actualmente 1 GiB almacenado, 50.000 lecturas/día, 20.000 escrituras/día y 10 GiB/mes de salida; no son ilimitadas y Google puede cambiar sus condiciones. No se ha creado ni configurado un proyecto Firebase para este sitio.
 - La agenda muestra un aviso mientras se incorporan actividades.
+
+## Migración del blog
+
+Se han importado las 138 entradas públicas disponibles en la API de la web original. El proceso conserva fechas, títulos, categorías y direcciones antiguas; las nuevas entradas también usan el formato de URL histórica con año, mes y día. Copia a `assets/img/blog/wordpress/` las imágenes propias optimizadas a un máximo de 1200 píxeles y mantiene los recursos externos como enlaces externos. Una imagen antigua de la entrada «Premios Ebrópolis 2022» ya no estaba disponible en el origen; se conservó el pie de foto y se omitió esa imagen. Las entradas migradas no activan comentarios automáticamente.
+
+El archivo del blog muestra 12 entradas por página. La migración se puede revisar con `node scripts/migrate-wordpress-posts.mjs` (simulación); `--apply` descarga las imágenes y crea los archivos, pero se detiene si detecta archivos que sobrescribiría.
+
+La política de privacidad se ha ampliado con datos publicados en la web original y con las funciones actuales de este proyecto. Aún quedan datos que la asociación debe confirmar antes de tratarla como definitiva, indicados en la propia página.
+
+## Campos SEO de las entradas
+
+En el panel, el bloque opcional **SEO · buscadores y vista al compartir** permite personalizar el título y la descripción que se incluyen en los metadatos de la página. Si se dejan vacíos, se usan el título y el resumen del artículo. Los buscadores deciden qué texto muestran y en qué posición; completar estos campos no garantiza aparecer primero.
+
+La opción **Ocultar de los resultados de búsqueda (no indexar)** pide a los buscadores que no incluyan la página en sus resultados. No protege el contenido ni lo hace privado.
 
 ## Comprobar la compilación
 
@@ -99,3 +113,18 @@ bundle exec jekyll build
 ```
 
 Si la compilación termina sin errores, los archivos generados estarán en `_site/`.
+
+### Comentarios con Google: configuración de Firebase
+
+1. Crea un proyecto Firebase con el plan Spark gratuito y registra una aplicación web.
+2. En **Authentication → Sign-in method**, activa Google. En **Authorized domains**, añade el dominio real del sitio.
+3. Crea una base de datos Cloud Firestore. Despliega desde la raíz del repositorio las reglas y el índice versionados aquí:
+
+   ```powershell
+   firebase deploy --only firestore:rules,firestore:indexes
+   ```
+
+4. Copia la configuración web de Firebase en `comments.api_key`, `comments.auth_domain`, `comments.project_id` y `comments.app_id` de `_config.yml`. Mantén `comments.enabled: false` hasta haber revisado la política de privacidad y probado el flujo en el dominio publicado.
+5. Activa `comments.enabled: true` y publica el sitio. Verifica inicio/cierre de sesión, publicación, visualización en otra sesión y eliminación de un comentario de prueba desde Firebase Console.
+
+Las personas comentan con cualquier cuenta Google, no solo direcciones `@gmail.com`. Firestore almacena el nombre público, texto, ruta de la entrada y fecha; los documentos de comentarios no incluyen correo ni UID. Firebase Authentication procesa la cuenta de Google para iniciar sesión. Los comentarios son públicos en cuanto se envían. Las reglas impiden que el cliente edite o borre comentarios; la gestión manual se realiza desde Firebase Console. El inicio de sesión no elimina por completo el riesgo de spam. El formulario pregunta por aceptación de publicación, pero la política de privacidad debe detallar el tratamiento y revisarse antes de activar el servicio. Consulta las cuotas vigentes de [Firebase](https://firebase.google.com/pricing) antes de lanzarlo.

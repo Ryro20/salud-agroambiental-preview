@@ -1,62 +1,44 @@
 {% assign comments = site.comments %}
-{% if comments.enabled and comments.repo and comments.repo_id and comments.category and comments.category_id %}
-<section class="comments" aria-labelledby="comments-title">
+{% if comments.enabled and comments.provider == 'firebase' and comments.api_key != blank and comments.auth_domain != blank and comments.project_id != blank and comments.app_id != blank %}
+<section class="comments" aria-labelledby="comments-title"
+         data-comments
+         data-api-key="{{ comments.api_key | escape }}"
+         data-auth-domain="{{ comments.auth_domain | escape }}"
+         data-project-id="{{ comments.project_id | escape }}"
+         data-app-id="{{ comments.app_id | escape }}"
+         data-collection="{{ comments.collection | default: 'comments' | escape }}">
   <header class="comments__header">
     <div>
       <p class="comments__eyebrow">Participa</p>
       <h2 id="comments-title">Comentarios</h2>
-      <p class="comments__intro">Comparte tu opinión, experiencia o pregunta con la comunidad.</p>
+      <p class="comments__intro">Comparte tu opinión, experiencia o pregunta con la comunidad. Necesitas una cuenta de Google para comentar.</p>
     </div>
   </header>
 
   <div class="comments__embed">
-    <script src="https://giscus.app/client.js"
-            data-repo="{{ comments.repo | escape }}"
-            data-repo-id="{{ comments.repo_id | escape }}"
-            data-category="{{ comments.category | escape }}"
-            data-category-id="{{ comments.category_id | escape }}"
-            data-mapping="{{ comments.mapping | default: 'pathname' | escape }}"
-            data-strict="{{ comments.strict | default: '0' | escape }}"
-            data-reactions-enabled="{{ comments.reactions_enabled | default: '1' | escape }}"
-            data-emit-metadata="{{ comments.emit_metadata | default: '0' | escape }}"
-            data-input-position="{{ comments.input_position | default: 'bottom' | escape }}"
-            data-theme="{{ comments.theme_light | default: 'light' | escape }}"
-            data-lang="{{ comments.lang | default: 'es' | escape }}"
-            data-loading="{{ comments.loading | default: 'lazy' | escape }}"
-            crossorigin="anonymous"
-            async>
-    </script>
-    <noscript>Activa JavaScript para cargar los comentarios.</noscript>
+    <p class="comments__status" data-comments-status role="status" aria-live="polite">Cargando comentarios…</p>
+    <div class="comments__auth" data-comments-auth hidden>
+      <p data-comments-user></p>
+      <button class="btn btn-outline" type="button" data-comments-sign-in>Entrar con Google</button>
+      <button class="comments__sign-out" type="button" data-comments-sign-out hidden>Cerrar sesión</button>
+    </div>
+
+    <form class="comments__form" data-comments-form hidden>
+      <label for="comment-text">Tu comentario</label>
+      <textarea id="comment-text" name="text" rows="4" maxlength="2000" required></textarea>
+      <div class="comments__form-footer">
+        <span>Máximo 2000 caracteres. Se publicará inmediatamente.</span>
+        <button class="btn btn-primary" type="submit">Publicar comentario</button>
+      </div>
+      <label class="comments__consent">
+        <input type="checkbox" name="consent" required>
+        <span>Entiendo que mi nombre de Google y mi comentario serán visibles públicamente. He leído la <a href="{{ '/politica-de-privacidad/' | relative_url }}">política de privacidad</a>.</span>
+      </label>
+    </form>
+
+    <ul class="comments__list" data-comments-list aria-live="polite"></ul>
+    <noscript>Activa JavaScript para cargar y publicar comentarios.</noscript>
   </div>
 </section>
-
-<script>
-  (function () {
-    var root = document.documentElement;
-    var darkTheme = {{ comments.theme_dark | default: 'dark_dimmed' | jsonify }};
-    var lightTheme = {{ comments.theme_light | default: 'light' | jsonify }};
-
-    function updateGiscusTheme() {
-      var iframe = document.querySelector('iframe.giscus-frame');
-      if (!iframe) return;
-      iframe.contentWindow.postMessage(
-        {
-          giscus: {
-            setConfig: { theme: root.dataset.theme === 'dark' ? darkTheme : lightTheme }
-          }
-        },
-        'https://giscus.app'
-      );
-    }
-
-    window.addEventListener('message', function (event) {
-      if (event.origin === 'https://giscus.app') updateGiscusTheme();
-    });
-
-    var observer = new MutationObserver(function () {
-      window.setTimeout(updateGiscusTheme, 50);
-    });
-    observer.observe(root, { attributes: true, attributeFilter: ['data-theme'] });
-  })();
-</script>
+<script type="module" src="{{ '/assets/js/comments.js' | relative_url }}"></script>
 {% endif %}

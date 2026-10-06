@@ -37,7 +37,7 @@ collections:
   - name: "posts"
     label: "Entradas del blog"
     label_singular: "Entrada"
-    description: "Crea, edita, reorganiza y publica artículos sin tocar HTML."
+    description: "Edita artículos, conserva contenido importado y crea composiciones visuales con bloques."
     folder: "_posts"
     create: true
     delete: true
@@ -142,13 +142,31 @@ collections:
         required: false
         hint: "Controla el ancho visual de la portada del artículo."
 
-      - label: "Contenido del artículo"
+      - label: "Texto y HTML del artículo (opcional)"
+        name: "body"
+        widget: "markdown"
+        required: false
+        modes: ["rich_text", "raw"]
+        buttons:
+          - bold
+          - italic
+          - strikethrough
+          - link
+          - heading-two
+          - heading-three
+          - heading-four
+          - quote
+          - bulleted-list
+          - numbered-list
+        hint: "Aquí se conserva el contenido original de las entradas importadas. Puedes editarlo en modo visual o HTML/Markdown; si añades bloques, aparecerán después de este contenido."
+
+      - label: "Bloques de diseño y contenido (opcional)"
         name: "blocks"
         widget: "list"
         allow_add: true
         allow_remove: true
         allow_reorder: true
-        hint: "Añade bloques en el orden en que quieras que aparezcan. Puedes arrastrarlos para reorganizar el artículo."
+        hint: "Crea composiciones personalizadas con texto, títulos, imágenes, galerías, imagen + texto, citas, destacados, botones y separadores. Puedes arrastrar los bloques para reorganizarlos."
         types:
           - label: "Texto enriquecido"
             name: "rich-text"
@@ -411,26 +429,29 @@ collections:
         widget: "boolean"
         default: true
         required: false
-        hint: "Activa o desactiva los comentarios de esta entrada. Los comentarios públicos usan Giscus/GitHub."
+        hint: "Activa o desactiva los comentarios de esta entrada. Solo aparecerán cuando Firebase esté configurado y activado para todo el sitio."
 
       - label: "SEO"
         name: "seo"
         widget: "object"
         collapsed: true
-        summary: "SEO"
+        summary: "SEO · buscadores y vista al compartir"
         required: false
+        hint: "Opcional. Personaliza cómo puede aparecer esta entrada en Google y al compartir el enlace. Si lo dejas vacío, se usan el título y el resumen del artículo. Esto no garantiza una posición concreta en los resultados."
         fields:
-          - label: "Título SEO"
+          - label: "Título para buscadores"
             name: "title"
             widget: "string"
             required: false
-            hint: "Opcional. Si se deja vacío se utiliza el título de la entrada."
-          - label: "Descripción SEO"
+            hint: "Puede aparecer como título del resultado de búsqueda y al compartir el enlace. Si lo dejas vacío, se usa el título de la entrada."
+          - label: "Descripción para buscadores"
             name: "description"
             widget: "text"
             required: false
-          - label: "No indexar"
+            hint: "Resume el contenido en una o dos frases. Puede aparecer bajo el título en buscadores y al compartir."
+          - label: "Ocultar de los resultados de búsqueda (no indexar)"
             name: "noindex"
             widget: "boolean"
             default: false
             required: false
+            hint: "Actívalo solo si no quieres que los buscadores incluyan esta página. No la hace privada ni impide que alguien con el enlace la visite."

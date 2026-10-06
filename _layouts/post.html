@@ -42,7 +42,12 @@ wide: true
       </aside>
 
       <div class="post-content" itemprop="articleBody">
-        {% if page.blocks %}
+        {% assign legacy_body = content | strip %}
+        {% if legacy_body != "" %}
+          {{ content }}
+        {% endif %}
+
+        {% if page.blocks and page.blocks != empty %}
           {% for block in page.blocks %}
             {% case block.type %}
               {% when 'rich-text' %}
@@ -150,8 +155,6 @@ wide: true
                 {% endif %}
             {% endcase %}
           {% endfor %}
-        {% else %}
-          {{ content }}
         {% endif %}
       </div>
     </div>
@@ -166,7 +169,7 @@ wide: true
   "@context": "https://schema.org",
   "@type": "BlogPosting",
   "headline": {{ page.title | jsonify }},
-  "description": {{ page.excerpt | strip_html | jsonify }},
+  "description": {{ page.seo.description | default: page.excerpt | strip_html | jsonify }},
   "datePublished": {{ page.date | date_to_xmlschema | jsonify }},
   "dateModified": {% if page.modified_date %}{{ page.modified_date | date_to_xmlschema | jsonify }}{% else %}{{ page.date | date_to_xmlschema | jsonify }}{% endif %},
   "author": {"@type": "Organization", "name": {{ site.title | jsonify }}},

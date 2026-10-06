@@ -218,6 +218,39 @@
 
 .comments { margin-top: 48px; padding-top: 36px; }
 .comments h2 { margin-bottom: 20px; color: var(--forest-900); font: 2.3rem/1 var(--display); }
+.comments [hidden] { display: none !important; }
+.comments__status { margin: 0 0 16px; color: var(--muted); font-size: .9rem; }
+.comments__status.is-error { color: #9b3027; }
+.comments__auth { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
+.comments__auth p { flex-basis: 100%; margin: 0; color: var(--muted); font-size: .88rem; }
+.comments__sign-out { padding: 8px 0; color: var(--green); border: 0; background: transparent; font: inherit; text-decoration: underline; cursor: pointer; }
+.comments__form { display: grid; gap: 12px; margin: 24px 0 30px; }
+.comments__form > label:first-child { color: var(--forest-900); font-size: .88rem; font-weight: 700; }
+.comments__form textarea {
+  width: 100%;
+  min-height: 120px;
+  padding: 13px 15px;
+  color: var(--ink);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  font: inherit;
+  line-height: 1.6;
+  resize: vertical;
+}
+.comments__form textarea:focus { outline: 0; border-color: var(--green); box-shadow: 0 0 0 4px color-mix(in srgb, var(--green) 12%, transparent); }
+.comments__form-footer { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; }
+.comments__form-footer > span { color: var(--muted); font-size: .76rem; }
+.comments__consent { display: flex; align-items: flex-start; gap: 9px; color: var(--muted); font-size: .78rem; line-height: 1.6; }
+.comments__consent input { flex: 0 0 auto; margin-top: 4px; accent-color: var(--green); }
+.comments__consent a { color: var(--green); }
+.comments__list { display: grid; gap: 14px; margin: 24px 0 0; padding: 0; list-style: none; }
+.comments__item { padding: 17px 19px; border: 1px solid var(--line); border-radius: var(--radius-md); background: var(--surface); }
+.comments__item-header { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 6px 14px; }
+.comments__item-header strong { color: var(--forest-900); font-size: .88rem; }
+.comments__item-header time { color: var(--muted); font-size: .75rem; }
+.comments__item p { margin: 10px 0 0; color: var(--ink); font-size: .9rem; line-height: 1.7; white-space: pre-wrap; overflow-wrap: anywhere; }
+.comments__empty { color: var(--muted); font-size: .9rem; }
 
 @media (min-width: 1400px) {
   .post-body-grid {

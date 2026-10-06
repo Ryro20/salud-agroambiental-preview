@@ -28,13 +28,17 @@
   {% endif %}
 
   <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{% if meta_title %}{{ meta_title }} · {% endif %}{{ site.title }}">
+  <meta name="twitter:description" content="{{ meta_description | strip_html | escape }}">
   {% if site.twitter_username %}
     <meta name="twitter:creator" content="@{{ site.twitter_username }}">
+  {% endif %}
+  {% if page.image %}
+    <meta name="twitter:image" content="{{ page.image | absolute_url }}">
   {% endif %}
 
   <link rel="canonical" href="{{ page.url | absolute_url }}">
 
-  {% seo %}
   {% feed_meta %}
 
   <link rel="preload" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display:ital@0;1&display=swap" as="style">

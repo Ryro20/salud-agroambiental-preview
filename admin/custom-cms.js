@@ -443,6 +443,17 @@
           }
         }
 
+        const bodyContent = stringValue(
+          safeGet(data, 'body', ''),
+          ''
+        );
+
+        const renderedBody =
+          bodyContent.trim() &&
+          typeof widgetsFor === 'function'
+            ? widgetsFor('body')
+            : null;
+
         const renderedBlocks = blocks
           .map(function (block, index) {
 
@@ -1396,16 +1407,29 @@
                       'articleBody'
                   },
 
-                  renderedBlocks.length
-                    ? renderedBlocks
-                    : h(
+                  renderedBody
+                    ? h(
+                        'div',
+                        {
+                          className:
+                            'post-block post-block--richtext'
+                        },
+                        renderedBody
+                      )
+                    : null,
+
+                  renderedBlocks,
+
+                  !renderedBody && !renderedBlocks.length
+                    ? h(
                         'p',
                         {
                           className:
                             'post-preview-empty'
                         },
-                        'Añade bloques de contenido para verlos aquí.'
+                        'Añade texto o bloques de contenido para verlos aquí.'
                       )
+                    : null
                 )
               ),
 
@@ -1478,7 +1502,7 @@
                     h(
                       'p',
                       {},
-                      'Giscus aparecerá aquí en la publicación real.'
+                      'Los comentarios configurados aparecerán aquí en la publicación real.'
                     )
                   )
                 : null
