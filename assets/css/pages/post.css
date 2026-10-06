@@ -63,8 +63,8 @@
 .post-header h1 {
   margin: 18px 0 0;
   color: var(--ink);
-  font: clamp(3.9rem, 6.8vw, 6.8rem)/.84 var(--display);
-  letter-spacing: -.025em;
+  font: clamp(3.1rem, 6vw, 5.8rem)/1.04 var(--display);
+  letter-spacing: -.035em;
 }
 
 .post-meta {
@@ -73,7 +73,7 @@
   gap: 10px;
   margin-top: 20px;
   color: var(--muted);
-  font-size: .61rem;
+  font-size: .7rem;
   font-weight: 700;
   letter-spacing: .15em;
   line-height: 1.5;
@@ -118,8 +118,8 @@
 
 .post-content {
   color: var(--ink-soft);
-  font-size: .97rem;
-  line-height: 1.95;
+  font-size: 1.02rem;
+  line-height: 1.8;
 }
 
 .post-content p { margin-bottom: 1.6rem; }
@@ -128,7 +128,7 @@
   position: relative;
   margin: 3.5rem 0 1rem;
   color: var(--forest-900);
-  font: 2.5rem/1 var(--display);
+  font: 2.2rem/1.1 var(--display);
 }
 
 .post-content h2::before {
@@ -142,7 +142,7 @@
   border-radius: 2px;
 }
 
-.post-content h3 { margin: 2.4rem 0 .85rem; color: var(--forest-900); font: 1.9rem/1 var(--display); }
+.post-content h3 { margin: 2.4rem 0 .85rem; color: var(--forest-900); font: 1.75rem/1.15 var(--display); }
 .post-content a { color: var(--green); text-decoration: underline; text-underline-offset: 4px; }
 .post-content a:hover { color: var(--clay); }
 
@@ -220,7 +220,7 @@
 .comments h2 { margin-bottom: 20px; color: var(--forest-900); font: 2.3rem/1 var(--display); }
 .comments [hidden] { display: none !important; }
 .comments__status { margin: 0 0 16px; color: var(--muted); font-size: .9rem; }
-.comments__status.is-error { color: #9b3027; }
+.comments__status.is-error { color: var(--error); }
 .comments__auth { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
 .comments__auth p { flex-basis: 100%; margin: 0; color: var(--muted); font-size: .88rem; }
 .comments__sign-out { padding: 8px 0; color: var(--green); border: 0; background: transparent; font: inherit; text-decoration: underline; cursor: pointer; }

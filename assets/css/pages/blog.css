@@ -29,7 +29,7 @@
   max-width: 920px;
   margin: 17px 0 0;
   color: var(--ink);
-  font: clamp(4rem, 7vw, 7rem)/.84 var(--display);
+  font: clamp(3.4rem, 6.2vw, 6.2rem)/1.02 var(--display);
   letter-spacing: -.025em;
 }
 
@@ -40,7 +40,7 @@
   max-width: 620px;
   margin: 28px 0 0;
   color: var(--muted);
-  font-size: .94rem;
+  font-size: 1rem;
   line-height: 1.85;
 }
 
@@ -108,7 +108,7 @@
   align-items: center;
   gap: 8px;
   color: var(--muted);
-  font-size: .61rem;
+  font-size: .7rem;
   font-weight: 700;
   letter-spacing: .09em;
   line-height: 1.4;
@@ -126,12 +126,12 @@
   max-width: 720px;
   margin: 11px 0 12px;
   color: var(--ink);
-  font: clamp(2rem, 3.5vw, 3.45rem)/.94 var(--display);
+  font: clamp(1.9rem, 3.2vw, 3.1rem)/1.08 var(--display);
   letter-spacing: -.015em;
 }
 
 .blog-entry-title a { text-decoration: none; }
-.blog-entry-excerpt { max-width: 680px; margin: 0; color: var(--muted); font-size: .88rem; }
+.blog-entry-excerpt { max-width: 680px; margin: 0; color: var(--muted); font-size: .96rem; line-height: 1.7; }
 
 .blog-entry-link {
   display: inline-flex;
@@ -139,7 +139,7 @@
   gap: 6px;
   margin-top: 20px;
   color: var(--green);
-  font-size: .68rem;
+  font-size: .74rem;
   font-weight: 800;
   letter-spacing: .05em;
   text-decoration: none;
@@ -195,7 +195,7 @@
 
 @media (max-width: 700px) {
   .page-hero { padding: 72px 0 66px; }
-  .page-hero h1 { font-size: 4rem; }
+  .page-hero h1 { font-size: clamp(3rem, 10vw, 4.2rem); }
   .blog-listing { padding: 56px 0 86px; }
   .listing-topline span:last-child { display: none; }
   .blog-entry {
@@ -205,11 +205,11 @@
   }
   .blog-entry-media { grid-column: 2; width: 100%; min-height: 210px; margin-top: 5px; }
   .blog-entry-media .image-placeholder { min-height: 210px; }
-  .blog-entry-excerpt { font-size: .8rem; }
+  .blog-entry-excerpt { font-size: .92rem; }
 }
 
 @media (max-width: 480px) {
-  .page-hero h1 { font-size: clamp(3.25rem, 15vw, 4rem); }
+  .page-hero h1 { font-size: clamp(2.75rem, 12vw, 3.55rem); }
   .blog-entry { grid-template-columns: 1fr; gap: 0; }
   .blog-entry-index { margin-bottom: 12px; }
   .blog-entry-media { grid-column: 1; min-height: 190px; margin-top: 22px; }

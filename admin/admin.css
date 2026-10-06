@@ -1,16 +1,18 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display:ital@0;1&display=swap');
 
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Nunito+Sans:wght@400;500;600;700;800&display=swap');
+
 :root {
-  --sa-bg: #f4f1e9;
-  --sa-surface: #fffdf8;
-  --sa-ink: #19362a;
-  --sa-muted: #66766c;
-  --sa-green: #2f6c50;
-  --sa-green-dark: #173d2d;
-  --sa-green-soft: #e6efe5;
-  --sa-clay: #b86549;
-  --sa-line: #d9dfd6;
-  --sa-shadow: 0 16px 50px rgba(23,61,45,.10);
+  --sa-bg: #f4f2e8;
+  --sa-surface: #fbfaf3;
+  --sa-ink: #293d2e;
+  --sa-muted: #5b695d;
+  --sa-green: #4f7049;
+  --sa-green-dark: #304b35;
+  --sa-green-soft: #dce6d5;
+  --sa-clay: #8d5238;
+  --sa-line: #d5dccf;
+  --sa-shadow: 0 16px 36px rgba(37,54,39,.09);
 }
 
 * { box-sizing: border-box; }
@@ -21,7 +23,7 @@ body.salbi-admin {
   margin: 0;
   background: var(--sa-bg);
   color: var(--sa-ink);
-  font-family: 'DM Sans', system-ui, sans-serif;
+  font-family: 'Nunito Sans', system-ui, sans-serif;
 }
 
 .salbi-admin-bar {
@@ -33,9 +35,9 @@ body.salbi-admin {
   justify-content: space-between;
   min-height: 76px;
   padding: 0 28px;
-  background: rgba(255,253,248,.94);
+  background: rgba(251,250,243,.94);
   border-bottom: 1px solid var(--sa-line);
-  box-shadow: 0 4px 20px rgba(23,61,45,.05);
+  box-shadow: 0 4px 20px rgba(37,54,39,.05);
   backdrop-filter: blur(18px);
 }
 
@@ -90,7 +92,7 @@ body:has(#nc-root [class*="EditorContainer"]) .salbi-admin-site-link {
   transition: background-color .18s ease, border-color .18s ease, color .18s ease, transform .18s ease;
 }
 
-.salbi-admin-link:hover { background: var(--sa-green-soft); border-color: #bfd0c2; transform: translateY(-1px); }
+.salbi-admin-link:hover { background: var(--sa-green-soft); border-color: #bac7b3; transform: translateY(-1px); }
 
 .salbi-admin-main { min-height: calc(100vh - 76px); }
 
@@ -116,7 +118,7 @@ body:has(#nc-root section[class*="AuthenticationPage"]) .salbi-admin-welcome {
 
 .salbi-admin-welcome h1 {
   margin: 0;
-  font: clamp(2.8rem, 4vw, 4rem)/.98 'DM Serif Display', Georgia, serif;
+  font: clamp(2.8rem, 4vw, 4rem)/1.08 'Lora', Georgia, serif;
   letter-spacing: -.035em;
 }
 
@@ -168,13 +170,13 @@ body:has(#nc-root section[class*="AuthenticationPage"]) #nc-root section[class*=
   color: #fff;
   font: inherit;
   font-weight: 700;
-  box-shadow: 0 8px 18px rgba(23,61,45,.16);
+  box-shadow: 0 8px 18px rgba(37,54,39,.16);
   transition: background-color .18s ease, transform .18s ease, box-shadow .18s ease;
 }
 
 body:has(#nc-root section[class*="AuthenticationPage"]) #nc-root section[class*="AuthenticationPage"] > button:hover {
   background: var(--sa-green);
-  box-shadow: 0 10px 22px rgba(23,61,45,.2);
+  box-shadow: 0 10px 22px rgba(37,54,39,.2);
   transform: translateY(-1px);
 }
 
@@ -207,7 +209,7 @@ body:has(#nc-root section[class*="AuthenticationPage"]) #nc-root section[class*=
   color: var(--sa-ink); font-size: 1.5rem; line-height: 1; cursor: pointer;
 }
 .salbi-admin-eyebrow { margin: 0 0 10px; color: var(--sa-clay); font-size: .65rem; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; }
-.salbi-admin-dialog h1 { margin: 0; font: 2.5rem/.95 'DM Serif Display', Georgia, serif; }
+.salbi-admin-dialog h1 { margin: 0; font: 2.5rem/1.05 'Lora', Georgia, serif; }
 .salbi-admin-dialog p:not(.salbi-admin-eyebrow) { max-width: 54ch; color: var(--sa-muted); line-height: 1.7; }
 .salbi-admin-help-grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 12px; margin: 26px 0; }
 .salbi-admin-help-grid article { padding: 18px; border: 1px solid var(--sa-line); border-radius: 16px; background: rgba(230,239,229,.45); }
@@ -218,11 +220,11 @@ body:has(#nc-root section[class*="AuthenticationPage"]) #nc-root section[class*=
   background: var(--sa-green-dark); color: #fff; font: inherit; font-weight: 700; cursor: pointer;
 }
 
-[data-slate-editor], .css-1wa3buu { font-family: 'DM Sans', system-ui, sans-serif; }
+[data-slate-editor], .css-1wa3buu { font-family: 'Nunito Sans', system-ui, sans-serif; }
 [class*="AppHeader"], [class*="AppHeader-content"] { box-shadow: none !important; }
 [class*="CollectionTop"] button, [class*="EditorControlPane"] button, [class*="Toolbar"] button { border-radius: 10px; }
 [class*="CollectionTop"] { background: var(--sa-surface); border-bottom: 1px solid var(--sa-line); }
-[class*="Sidebar"] { background: #f0eee7 !important; border-right: 1px solid var(--sa-line); }
+[class*="Sidebar"] { background: #e8e9dc !important; border-right: 1px solid var(--sa-line); }
 [class*="SidebarNavLink"], [class*="ListItem"] { border-radius: 10px !important; }
 [class*="SidebarNavLink"][aria-current="page"] { background: var(--sa-green-soft) !important; color: var(--sa-green-dark) !important; }
 [class*="EditorControlPane"] { background: var(--sa-bg) !important; }
@@ -244,14 +246,14 @@ body:has(#nc-root section[class*="AuthenticationPage"]) #nc-root section[class*=
 [class*="ControlPane"] textarea:focus,
 [class*="ControlPane"] select:focus {
   border-color: var(--sa-green) !important;
-  box-shadow: 0 0 0 3px rgba(47,108,80,.12) !important;
+  box-shadow: 0 0 0 3px rgba(79,112,73,.12) !important;
 }
 [class*="ListControl"] { color: var(--sa-ink); }
 [class*="ListControl"] [class*="ListItem"] {
   margin-block: 8px;
   border: 1px solid var(--sa-line) !important;
   background: var(--sa-surface) !important;
-  box-shadow: 0 2px 8px rgba(23,61,45,.035);
+  box-shadow: 0 2px 8px rgba(37,54,39,.035);
 }
 [class*="ListControl"] button,
 [class*="ObjectControl"] button,
@@ -268,7 +270,7 @@ body:has(#nc-root section[class*="AuthenticationPage"]) #nc-root section[class*=
 [class*="ListControl"] [role="button"][aria-haspopup="true"] {
   min-height: 44px;
   padding: 10px 14px;
-  border: 1px solid #cbd9cd;
+  border: 1px solid #c5d0be;
   border-radius: 10px;
   background: var(--sa-green-soft);
   color: var(--sa-green-dark);
@@ -277,17 +279,17 @@ body:has(#nc-root section[class*="AuthenticationPage"]) #nc-root section[class*=
   transition: background-color .18s ease, border-color .18s ease, box-shadow .18s ease;
 }
 [class*="ListControl"] [role="button"][aria-haspopup="true"]:hover {
-  border-color: #a9c3ad;
-  background: #dcebdd;
+  border-color: #9eaf94;
+  background: #e3eadc;
 }
 [class*="ListControl"] [role="button"][aria-haspopup="true"]:focus-visible {
-  box-shadow: 0 0 0 3px rgba(47,108,80,.14);
+  box-shadow: 0 0 0 3px rgba(79,112,73,.14);
 }
 [role="menu"] {
   overflow: hidden;
   border: 1px solid var(--sa-line) !important;
   border-radius: 12px !important;
-  box-shadow: 0 12px 32px rgba(23,61,45,.16) !important;
+  box-shadow: 0 12px 32px rgba(37,54,39,.16) !important;
 }
 [role="menuitem"] {
   min-height: 44px;
@@ -301,7 +303,7 @@ body:has(#nc-root section[class*="AuthenticationPage"]) #nc-root section[class*=
 [class*="EditorControlPane"] [class*="Toolbar"] {
   border: 1px solid var(--sa-line);
   border-radius: 12px 12px 0 0;
-  background: #f0eee7;
+  background: #e8e9dc;
 }
 [class*="EditorContainer"] {
   top: 76px !important;
@@ -341,7 +343,7 @@ body:has(#nc-root section[class*="AuthenticationPage"]) #nc-root section[class*=
 #nc-root :focus-visible,
 .salbi-admin-bar :focus-visible,
 .salbi-admin-dialog :focus-visible {
-  outline: 3px solid #91b89b;
+  outline: 3px solid #8da47b;
   outline-offset: 3px;
 }
 
@@ -358,7 +360,7 @@ body:has(#nc-root section[class*="AuthenticationPage"]) #nc-root section[class*=
   padding: 0 20px;
   border-radius: 999px;
   background: var(--sa-green-dark);
-  color: #fff;
+  color: #fbfaf3;
   box-shadow: var(--sa-shadow);
 }
 

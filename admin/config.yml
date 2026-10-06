@@ -144,21 +144,9 @@ collections:
 
       - label: "Texto y HTML del artículo (opcional)"
         name: "body"
-        widget: "markdown"
+        widget: "text"
         required: false
-        modes: ["rich_text", "raw"]
-        buttons:
-          - bold
-          - italic
-          - strikethrough
-          - link
-          - heading-two
-          - heading-three
-          - heading-four
-          - quote
-          - bulleted-list
-          - numbered-list
-        hint: "Aquí se conserva el contenido original de las entradas importadas. Puedes editarlo en modo visual o HTML/Markdown; si añades bloques, aparecerán después de este contenido."
+        hint: "Aquí se conserva y edita el HTML/Markdown original. El contenido aparece antes de los bloques que añadas debajo."
 
       - label: "Bloques de diseño y contenido (opcional)"
         name: "blocks"

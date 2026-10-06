@@ -18,7 +18,7 @@
       const themeLink = document.createElement('link');
 
       themeLink.rel = 'stylesheet';
-      themeLink.href = siteAssetUrl('admin/admin.css?v=9');
+      themeLink.href = siteAssetUrl('admin/admin.css?v=10');
       themeLink.dataset.salbiAdminTheme = 'true';
 
       document.head.appendChild(themeLink);
@@ -214,6 +214,147 @@
       return null;
     }
 
+    function safeBodyUrl(value, attribute) {
+      const url = value.trim();
+
+      if (!url) {
+        return '';
+      }
+
+      if (attribute === 'href' && url.charAt(0) === '#') {
+        return url;
+      }
+
+      try {
+        const parsed = new URL(
+          previewAssetUrl(url),
+          siteBaseUrl
+        );
+
+        if (
+          parsed.protocol === 'http:' ||
+          parsed.protocol === 'https:' ||
+          (attribute === 'href' &&
+            (parsed.protocol === 'mailto:' ||
+              parsed.protocol === 'tel:'))
+        ) {
+          return parsed.href;
+        }
+      } catch (error) {
+        console.warn(
+          'Se ha omitido una URL no válida en la vista previa:',
+          value
+        );
+
+        return '';
+      }
+
+      return '';
+    }
+
+    function renderBodyContent(value) {
+      const content = value.trim();
+
+      if (!content) {
+        return null;
+      }
+
+      const parsed = new DOMParser().parseFromString(
+        content,
+        'text/html'
+      );
+
+      if (!/<\/?[a-z][^>]*>/i.test(content)) {
+        parsed.body.textContent = '';
+
+        content.split(/\n\s*\n/).forEach(function (paragraph) {
+          if (!paragraph.trim()) {
+            return;
+          }
+
+          const element = parsed.createElement('p');
+          const lines = paragraph.split(/\n/);
+
+          lines.forEach(function (line, index) {
+            if (index > 0) {
+              element.appendChild(parsed.createElement('br'));
+            }
+
+            element.appendChild(parsed.createTextNode(line));
+          });
+
+          parsed.body.appendChild(element);
+        });
+
+        return parsed.body.innerHTML;
+      }
+
+      const allowedTags = new Set([
+        'a', 'b', 'blockquote', 'br', 'caption', 'cite', 'code',
+        'dd', 'del', 'div', 'dl', 'dt', 'em', 'figcaption', 'figure',
+        'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'hr', 'i', 'img',
+        'li', 'ol', 'p', 'pre', 's', 'small', 'span', 'strong',
+        'sub', 'sup', 'table', 'tbody', 'td', 'th', 'thead', 'tr',
+        'u', 'ul'
+      ]);
+      const droppedTags = new Set([
+        'embed', 'iframe', 'object', 'script', 'style'
+      ]);
+      const allowedAttributes = new Set([
+        'alt', 'class', 'colspan', 'height', 'rowspan', 'title', 'width'
+      ]);
+
+      Array.from(parsed.body.querySelectorAll('*')).forEach(function (node) {
+        const tagName = node.tagName.toLowerCase();
+
+        if (droppedTags.has(tagName)) {
+          node.remove();
+          return;
+        }
+
+        if (!allowedTags.has(tagName)) {
+          node.replaceWith(...Array.from(node.childNodes));
+          return;
+        }
+
+        Array.from(node.attributes).forEach(function (attribute) {
+          const name = attribute.name.toLowerCase();
+          let value = attribute.value;
+
+          if (allowedAttributes.has(name)) {
+            return;
+          }
+
+          if (name === 'href' && tagName === 'a') {
+            value = safeBodyUrl(value, 'href');
+          } else if (name === 'src' && tagName === 'img') {
+            value = safeBodyUrl(value, 'src');
+          } else if (
+            name === 'target' &&
+            tagName === 'a' &&
+            (value === '_blank' || value === '_self')
+          ) {
+            return;
+          } else {
+            node.removeAttribute(attribute.name);
+            return;
+          }
+
+          if (value) {
+            node.setAttribute(name, value);
+          } else {
+            node.removeAttribute(attribute.name);
+          }
+        });
+
+        if (node.getAttribute('target') === '_blank') {
+          node.setAttribute('rel', 'noopener noreferrer');
+        }
+      });
+
+      return parsed.body.innerHTML;
+    }
+
     function getBlockRecordValue(block, key, fallback) {
       return safeGetIn(
         block,
@@ -326,7 +467,7 @@
     );
 
     CMS.registerPreviewStyle(
-      siteAssetUrl('admin/preview.css')
+      siteAssetUrl('admin/preview.css?v=2')
     );
 
     const PostPreview = createClass({
@@ -448,11 +589,7 @@
           ''
         );
 
-        const renderedBody =
-          bodyContent.trim() &&
-          typeof widgetsFor === 'function'
-            ? widgetsFor('body')
-            : null;
+        const renderedBody = renderBodyContent(bodyContent);
 
         const renderedBlocks = blocks
           .map(function (block, index) {
@@ -1412,9 +1549,11 @@
                         'div',
                         {
                           className:
-                            'post-block post-block--richtext'
-                        },
-                        renderedBody
+                            'post-block post-block--richtext',
+                          dangerouslySetInnerHTML: {
+                            __html: renderedBody
+                          }
+                        }
                       )
                     : null,
 

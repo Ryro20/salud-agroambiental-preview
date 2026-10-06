@@ -1,12 +1,12 @@
 html, body {
   margin: 0;
   min-height: 100%;
-  background: var(--bg, #f7f4ed);
-  color: var(--ink, #19362a);
+  background: var(--bg, #f4f2e8);
+  color: var(--ink, #293d2e);
 }
 
 body {
-  font-family: var(--body, 'DM Sans', system-ui, sans-serif);
+  font-family: var(--body, 'Nunito Sans', system-ui, sans-serif);
 }
 
 .post-preview {
@@ -17,10 +17,10 @@ body {
   margin: 0 auto 22px;
   max-width: var(--reading-width, 720px);
   padding: 8px 12px;
-  border: 1px dashed var(--line, #d7ded4);
+  border: 1px dashed var(--line, #d5dccf);
   border-radius: 10px;
-  background: color-mix(in srgb, var(--green-pale, #eef5ed) 72%, transparent);
-  color: var(--muted, #6e7c73);
+  background: color-mix(in srgb, var(--green-pale, #edf1e6) 72%, transparent);
+  color: var(--muted, #5b695d);
   font-size: .68rem;
   font-weight: 700;
   letter-spacing: .08em;
@@ -48,12 +48,12 @@ body {
 
 .salbi-percentage-control input[type="range"] {
   width: 100%;
-  accent-color: #2f6c50;
+  accent-color: #4f7049;
 }
 
 .salbi-percentage-control__value {
   min-width: 48px;
-  color: #173d2d;
+  color: #304b35;
   font-weight: 700;
   text-align: right;
 }
@@ -61,13 +61,13 @@ body {
 .salbi-percentage-control__hint {
   display: block;
   margin-top: 7px;
-  color: #6e7c73;
+  color: #5b695d;
   font-size: .72rem;
   line-height: 1.5;
 }
 
 .salbi-percentage-preview {
-  color: #2f6c50;
+  color: #4f7049;
   font-weight: 700;
 }
 
@@ -88,7 +88,7 @@ body {
 }
 
 .post-preview-shell-label {
-  color: var(--muted, #6e7c73);
+  color: var(--muted, #5b695d);
   font-size: .68rem;
   font-weight: 700;
   letter-spacing: .12em;

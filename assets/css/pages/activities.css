@@ -19,15 +19,17 @@
   max-width: 930px;
   margin: 15px 0 25px;
   color: var(--ink);
-  font: clamp(3.8rem, 7vw, 7.35rem)/.86 var(--display);
-  letter-spacing: -.025em;
+  font: clamp(3.2rem, 6.2vw, 5.9rem)/1.04 var(--display);
+  letter-spacing: -.035em;
 }
 
 .activities-hero h1 em,
 .collab-contact-box h2 em,
 .contact-hero h1 em { color: var(--clay); font-style: italic; }
 
-.activities-hero p:not(.eyebrow) { max-width: 700px; color: var(--muted); }
+.collab-contact-box h2 em { color: var(--paper, var(--white)); }
+
+.activities-hero p:not(.eyebrow) { max-width: 700px; color: var(--muted); font-size: 1.02rem; line-height: 1.75; }
 
 .activities-index-card {
   position: relative;
@@ -58,14 +60,14 @@
   position: absolute;
   top: 24px;
   left: 25px;
-  color: color-mix(in srgb, currentColor 62%, transparent);
+  color: var(--paper, var(--white));
   font-size: .68rem;
   font-weight: 700;
   letter-spacing: .12em;
 }
 
-.activities-index-card strong { font: 2.5rem/.95 var(--display); }
-.activities-index-card small { margin-top: 8px; color: color-mix(in srgb, currentColor 70%, transparent); }
+.activities-index-card strong { font: 2.25rem/1.08 var(--display); }
+.activities-index-card small { margin-top: 8px; color: var(--paper, var(--white)); }
 .activities-index-card i { position: absolute; right: 25px; bottom: 25px; font-style: normal; font-size: 1.4rem; }
 
 .activities-catalog,
@@ -108,7 +110,7 @@
 .collab-card h3 {
   margin: 0 0 13px;
   color: var(--ink);
-  font: clamp(2rem, 3vw, 3rem)/.96 var(--display);
+  font: clamp(1.85rem, 2.7vw, 2.7rem)/1.08 var(--display);
 }
 
 .activity-card p,
@@ -137,7 +139,7 @@
 .agenda-heading h2 {
   margin: 0;
   color: var(--ink);
-  font: clamp(3rem, 5vw, 5rem)/.9 var(--display);
+  font: clamp(2.6rem, 4.5vw, 4.5rem)/1.04 var(--display);
 }
 
 .agenda-heading p { max-width: 420px; margin: 0; color: var(--muted); }
@@ -187,13 +189,13 @@
 
 .bridge-card h2 {
   margin: 6px 0 0;
-  font: clamp(2.2rem, 4vw, 4rem)/.95 var(--display);
+  font: clamp(2rem, 3.5vw, 3.5rem)/1.08 var(--display);
 }
 
 .bridge-card p,
 .collab-contact-box p {
   margin: 0;
-  color: color-mix(in srgb, var(--paper, var(--white)) 74%, transparent);
+  color: var(--paper, var(--white));
 }
 
 .bridge-card .btn-dark,
@@ -245,10 +247,6 @@
 }
 
 .area-feature-card--large:hover { background: color-mix(in srgb, var(--forest-900, var(--green-dark)) 88%, var(--green)); }
-.area-feature-card--large h2,
-.area-feature-card--large p,
-.area-feature-card--large strong { color: var(--paper, var(--white)); }
-
 .area-feature-card > span {
   position: absolute;
   top: 23px;
@@ -256,17 +254,19 @@
   color: var(--muted);
 }
 
-.area-feature-card--large > span { color: color-mix(in srgb, var(--paper, var(--white)) 62%, transparent); }
+.area-feature-card--large > span { color: var(--paper, var(--white)); }
 
 .area-feature-card h2 {
   margin: 0 0 12px;
   color: var(--ink);
-  font: clamp(2.2rem, 4vw, 4.2rem)/.92 var(--display);
+  font: clamp(2rem, 3.6vw, 3.8rem)/1.06 var(--display);
 }
 
 .area-feature-card p { margin: 0 0 18px; color: var(--muted); }
 .area-feature-card strong { color: var(--green); font-size: .76rem; }
-.area-feature-card--large strong { color: var(--clay); }
+.area-feature-card--large h2,
+.area-feature-card--large p,
+.area-feature-card--large strong { color: var(--paper, var(--white)); }
 
 .area-notes { padding: 100px 0; background: var(--surface-alt); }
 
@@ -284,7 +284,7 @@
 .area-notes h2 {
   margin: 8px 0 15px;
   color: var(--ink);
-  font: clamp(2rem, 3vw, 3.2rem)/.95 var(--display);
+  font: clamp(1.85rem, 2.7vw, 2.8rem)/1.08 var(--display);
 }
 
 .area-notes p { margin: 0; color: var(--muted); }
@@ -323,7 +323,7 @@
 .collab-contact-box h2 {
   margin: 7px 0 0;
   color: var(--paper, var(--white));
-  font: clamp(2.5rem, 4vw, 4.4rem)/.94 var(--display);
+  font: clamp(2.15rem, 3.6vw, 3.7rem)/1.05 var(--display);
 }
 
 @media (max-width: 900px) {
@@ -346,7 +346,7 @@
 
 @media (max-width: 600px) {
   .activities-hero { padding: 65px 0 75px; }
-  .activities-hero h1 { font-size: clamp(3.35rem, 15vw, 5.2rem); }
+  .activities-hero h1 { font-size: clamp(2.75rem, 12vw, 3.9rem); }
 
   .activities-catalog,
   .areas-catalog,

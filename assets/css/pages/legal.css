@@ -9,15 +9,16 @@
 .legal-page h1 {
   margin: 12px 0 20px;
   color: var(--ink);
-  font: clamp(3.6rem, 7vw, 6.5rem)/.88 var(--display);
-  letter-spacing: -.025em;
+  font: clamp(3rem, 6vw, 5.5rem)/1.04 var(--display);
+  letter-spacing: -.035em;
 }
 
 .legal-intro {
   max-width: 700px;
   margin: 0 0 55px;
   color: var(--muted);
-  font-size: 1.02rem;
+  font-size: 1.05rem;
+  line-height: 1.75;
 }
 
 .legal-page section {
@@ -28,7 +29,7 @@
 .legal-page h2 {
   margin: 0 0 12px;
   color: var(--ink);
-  font: 2rem/.98 var(--display);
+  font: 1.85rem/1.12 var(--display);
 }
 
 .legal-page p,
@@ -56,5 +57,5 @@
 
 @media (max-width: 600px) {
   .legal-page { width: min(calc(100% - 34px), 820px); padding: 65px 0; }
-  .legal-page h1 { font-size: 3.7rem; }
+  .legal-page h1 { font-size: clamp(2.55rem, 10.5vw, 3.4rem); }
 }

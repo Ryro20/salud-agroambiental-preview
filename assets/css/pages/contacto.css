@@ -19,11 +19,11 @@
   max-width: 820px;
   margin: 14px 0 23px;
   color: var(--ink);
-  font: clamp(3.8rem, 7vw, 7rem)/.85 var(--display);
-  letter-spacing: -.025em;
+  font: clamp(3.25rem, 6.2vw, 5.8rem)/1.04 var(--display);
+  letter-spacing: -.035em;
 }
 
-.contact-hero p:not(.eyebrow) { max-width: 650px; color: var(--muted); }
+.contact-hero p:not(.eyebrow) { max-width: 650px; color: var(--muted); font-size: 1.02rem; line-height: 1.75; }
 
 .contact-direct {
   padding: 30px;
@@ -67,7 +67,7 @@
 .contact-body h2 {
   margin: 8px 0 16px;
   color: var(--ink);
-  font: clamp(2.8rem, 5vw, 5rem)/.9 var(--display);
+  font: clamp(2.5rem, 4.5vw, 4.4rem)/1.04 var(--display);
 }
 
 .contact-body p { max-width: 520px; color: var(--muted); }
@@ -86,7 +86,7 @@
 
 @media (max-width: 600px) {
   .contact-hero { padding: 65px 0 75px; }
-  .contact-hero h1 { font-size: clamp(3.4rem, 15vw, 5.2rem); }
+  .contact-hero h1 { font-size: clamp(2.8rem, 12.5vw, 4rem); }
   .contact-body { padding: 72px 0; }
   .contact-direct { padding: 25px; }
 }
