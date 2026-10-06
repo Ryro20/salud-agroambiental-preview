@@ -86,6 +86,99 @@ body.salbi-admin {
 
 #nc-root { min-height: calc(100vh - 76px); }
 
+.salbi-admin-welcome { display: none; }
+
+body:has(#nc-root section[class*="AuthenticationPage"]) .salbi-admin-main {
+  display: grid;
+  grid-template-columns: minmax(0, 430px) minmax(320px, 410px);
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  gap: clamp(36px, 6vw, 88px);
+  min-height: calc(100vh - 76px);
+  padding: 64px 28px;
+}
+
+body:has(#nc-root section[class*="AuthenticationPage"]) .salbi-admin-welcome {
+  display: block;
+  max-width: 430px;
+}
+
+.salbi-admin-welcome h1 {
+  margin: 0;
+  font: clamp(2.8rem, 4vw, 4rem)/.98 'DM Serif Display', Georgia, serif;
+  letter-spacing: -.035em;
+}
+
+.salbi-admin-welcome > p:last-child {
+  max-width: 42ch;
+  margin: 20px 0 0;
+  color: var(--sa-muted);
+  font-size: 1.05rem;
+  line-height: 1.75;
+}
+
+body:has(#nc-root section[class*="AuthenticationPage"]) #nc-root {
+  display: block;
+  width: 100%;
+  min-width: 0;
+  min-height: 0;
+}
+
+body:has(#nc-root section[class*="AuthenticationPage"]) #nc-root section[class*="AuthenticationPage"] {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: center;
+  gap: 14px;
+  width: 100%;
+  height: auto !important;
+  min-height: 300px;
+  padding: 36px;
+  border: 1px solid var(--sa-line);
+  border-radius: 24px;
+  background: var(--sa-surface);
+  box-shadow: var(--sa-shadow);
+}
+
+body:has(#nc-root section[class*="AuthenticationPage"]) #nc-root section[class*="AuthenticationPage"] > span:first-child,
+body:has(#nc-root section[class*="AuthenticationPage"]) #nc-root section[class*="AuthenticationPage"] > span:last-child {
+  display: none;
+}
+
+body:has(#nc-root section[class*="AuthenticationPage"]) #nc-root section[class*="AuthenticationPage"] > button {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  min-height: 52px;
+  margin: 0;
+  border: 0;
+  border-radius: 12px;
+  background: var(--sa-green-dark);
+  color: #fff;
+  font: inherit;
+  font-weight: 700;
+  box-shadow: 0 8px 18px rgba(23,61,45,.16);
+  transition: background-color .18s ease, transform .18s ease, box-shadow .18s ease;
+}
+
+body:has(#nc-root section[class*="AuthenticationPage"]) #nc-root section[class*="AuthenticationPage"] > button:hover {
+  background: var(--sa-green);
+  box-shadow: 0 10px 22px rgba(23,61,45,.2);
+  transform: translateY(-1px);
+}
+
+body:has(#nc-root section[class*="AuthenticationPage"]) #nc-root section[class*="AuthenticationPage"] > a {
+  justify-content: center;
+  margin: 0;
+  color: var(--sa-muted);
+  text-decoration: none;
+}
+
+body:has(#nc-root section[class*="AuthenticationPage"]) #nc-root section[class*="AuthenticationPage"] > a:hover {
+  color: var(--sa-green-dark);
+}
+
 .salbi-admin-dialog {
   width: min(680px, calc(100vw - 32px));
   padding: 0;
@@ -118,16 +211,71 @@ body.salbi-admin {
 [data-slate-editor], .css-1wa3buu { font-family: 'DM Sans', system-ui, sans-serif; }
 [class*="AppHeader"], [class*="AppHeader-content"] { box-shadow: none !important; }
 [class*="CollectionTop"] button, [class*="EditorControlPane"] button, [class*="Toolbar"] button { border-radius: 10px; }
-[class*="CollectionTop"] { background: var(--sa-surface); }
-[class*="Sidebar"] { background: #f0eee7 !important; }
+[class*="CollectionTop"] { background: var(--sa-surface); border-bottom: 1px solid var(--sa-line); }
+[class*="Sidebar"] { background: #f0eee7 !important; border-right: 1px solid var(--sa-line); }
 [class*="SidebarNavLink"], [class*="ListItem"] { border-radius: 10px !important; }
 [class*="SidebarNavLink"][aria-current="page"] { background: var(--sa-green-soft) !important; color: var(--sa-green-dark) !important; }
-[class*="ControlPane"] input,
+[class*="EditorControlPane"] { background: var(--sa-bg) !important; }
+[class*="ControlPane"] label { color: var(--sa-ink) !important; font-weight: 600; }
+[class*="ControlPane"] [class*="Hint"] { color: var(--sa-muted) !important; font-size: .78rem; line-height: 1.55; }
+[class*="ControlPane"] input:not([type="checkbox"]):not([type="radio"]):not([type="range"]),
 [class*="ControlPane"] textarea,
-[class*="ControlPane"] select { border-radius: 10px !important; }
-[class*="ControlPane"] label { color: var(--sa-ink) !important; }
+[class*="ControlPane"] select {
+  min-height: 44px;
+  padding: 10px 12px;
+  border: 1px solid var(--sa-line) !important;
+  border-radius: 10px !important;
+  background-color: var(--sa-surface) !important;
+  color: var(--sa-ink) !important;
+  transition: border-color .18s ease, box-shadow .18s ease;
+}
+[class*="ControlPane"] textarea { min-height: 96px; line-height: 1.6; }
+[class*="ControlPane"] input:focus,
+[class*="ControlPane"] textarea:focus,
+[class*="ControlPane"] select:focus {
+  border-color: var(--sa-green) !important;
+  box-shadow: 0 0 0 3px rgba(47,108,80,.12) !important;
+}
+[class*="ListControl"] { color: var(--sa-ink); }
+[class*="ListControl"] [class*="ListItem"] {
+  margin-block: 8px;
+  border: 1px solid var(--sa-line) !important;
+  background: var(--sa-surface) !important;
+  box-shadow: 0 2px 8px rgba(23,61,45,.035);
+}
+[class*="ListControl"] button,
+[class*="ObjectControl"] button,
+[class*="ImageControl"] button {
+  min-height: 36px;
+  color: var(--sa-green-dark);
+  font-weight: 600;
+}
+[class*="ListControl"] button:hover,
+[class*="ObjectControl"] button:hover,
+[class*="ImageControl"] button:hover {
+  background-color: var(--sa-green-soft);
+}
+[class*="EditorControlPane"] [class*="Toolbar"] {
+  border: 1px solid var(--sa-line);
+  border-radius: 12px 12px 0 0;
+  background: #f0eee7;
+}
+[data-slate-editor] {
+  min-height: 180px;
+  padding: 16px;
+  border: 1px solid var(--sa-line);
+  border-radius: 0 0 12px 12px;
+  background: var(--sa-surface);
+  line-height: 1.7;
+}
 [class*="StatusBar"] { border-top-color: var(--sa-line) !important; }
 [class*="EditorContainer"] { background: var(--sa-surface) !important; }
+#nc-root :focus-visible,
+.salbi-admin-bar :focus-visible,
+.salbi-admin-dialog :focus-visible {
+  outline: 3px solid #91b89b;
+  outline-offset: 3px;
+}
 
 #nc-root [class*="ToolbarDropdown-buttonMargin"]:has([class*="PublishButton"]) {
   position: fixed !important;
@@ -152,8 +300,44 @@ body.salbi-admin {
   .salbi-admin-link { padding: 0 10px; }
   .salbi-admin-help-grid { grid-template-columns: 1fr; }
   .salbi-admin-dialog__inner { padding: 30px 22px 24px; }
+
+  body:has(#nc-root section[class*="AuthenticationPage"]) .salbi-admin-main {
+    grid-template-columns: minmax(0, 1fr);
+    align-content: start;
+    gap: 26px;
+    padding: 48px 20px 36px;
+  }
+
+  body:has(#nc-root section[class*="AuthenticationPage"]) .salbi-admin-welcome {
+    max-width: 520px;
+    margin: 0 auto;
+  }
+
+  .salbi-admin-welcome h1 { font-size: clamp(2.5rem, 11vw, 3.5rem); }
+
+  body:has(#nc-root section[class*="AuthenticationPage"]) #nc-root {
+    max-width: 520px;
+    margin: 0 auto;
+  }
+
+  body:has(#nc-root section[class*="AuthenticationPage"]) #nc-root section[class*="AuthenticationPage"] {
+    min-height: 0;
+    padding: 26px 22px;
+    border-radius: 20px;
+  }
+
+  #nc-root [class*="EditorControlPane"] { min-width: 0; }
+  #nc-root [class*="ControlPane"] input:not([type="checkbox"]):not([type="radio"]):not([type="range"]),
+  #nc-root [class*="ControlPane"] textarea,
+  #nc-root [class*="ControlPane"] select { max-width: 100%; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .salbi-admin-link { transition: none; }
+  .salbi-admin-link,
+  [class*="ControlPane"] input,
+  [class*="ControlPane"] textarea,
+  [class*="ControlPane"] select,
+  body:has(#nc-root section[class*="AuthenticationPage"]) #nc-root section[class*="AuthenticationPage"] > button {
+    transition: none;
+  }
 }

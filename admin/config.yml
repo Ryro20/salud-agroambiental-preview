@@ -62,6 +62,7 @@ collections:
         widget: "datetime"
         format: "YYYY-MM-DD HH:mm:ss Z"
         time_format: "HH:mm"
+        hint: "Elige cuándo debe aparecer publicada la entrada."
 
       - label: "Última modificación"
         name: "modified_date"
@@ -147,6 +148,7 @@ collections:
         allow_add: true
         allow_remove: true
         allow_reorder: true
+        hint: "Añade bloques en el orden en que quieras que aparezcan. Puedes arrastrarlos para reorganizar el artículo."
         types:
           - label: "Texto enriquecido"
             name: "rich-text"
