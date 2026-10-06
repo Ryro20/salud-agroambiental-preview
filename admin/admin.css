@@ -62,6 +62,16 @@ body.salbi-admin {
 }
 
 .salbi-admin-actions { display: flex; align-items: center; gap: 8px; }
+.salbi-admin-editor-back { display: none; }
+.salbi-admin-editor-back__compact { display: none; }
+
+body:has(#nc-root [class*="EditorContainer"]) .salbi-admin-editor-back {
+  display: inline-flex;
+}
+
+body:has(#nc-root [class*="EditorContainer"]) .salbi-admin-site-link {
+  display: none;
+}
 
 .salbi-admin-link {
   display: inline-flex;
@@ -293,6 +303,31 @@ body:has(#nc-root section[class*="AuthenticationPage"]) #nc-root section[class*=
   border-radius: 12px 12px 0 0;
   background: #f0eee7;
 }
+[class*="EditorContainer"] {
+  top: 76px !important;
+  height: calc(100vh - 76px) !important;
+}
+[class*="EditorContainer"] a[href="#/collections/posts"] {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 54px;
+  padding: 0 16px;
+  border-right: 1px solid var(--sa-line);
+  color: var(--sa-green-dark);
+  text-decoration: none;
+}
+[class*="EditorContainer"] a[href="#/collections/posts"]:hover {
+  background: var(--sa-green-soft);
+}
+[class*="EditorContainer"] [class*="BackCollection"] {
+  font-size: 0;
+}
+[class*="EditorContainer"] [class*="BackCollection"]::after {
+  content: "Volver a publicaciones";
+  font-size: .84rem;
+  font-weight: 700;
+}
 [data-slate-editor] {
   min-height: 180px;
   padding: 16px;
@@ -331,6 +366,8 @@ body:has(#nc-root section[class*="AuthenticationPage"]) #nc-root section[class*=
   .salbi-admin-bar { padding: 0 14px; }
   .salbi-admin-brand small { display: none; }
   .salbi-admin-link { padding: 0 10px; }
+  .salbi-admin-editor-back__wide { display: none; }
+  .salbi-admin-editor-back__compact { display: inline; }
   .salbi-admin-help-grid { grid-template-columns: 1fr; }
   .salbi-admin-dialog__inner { padding: 30px 22px 24px; }
 
@@ -377,6 +414,33 @@ body:has(#nc-root section[class*="AuthenticationPage"]) #nc-root section[class*=
     flex: 0 0 50% !important;
   }
   #nc-root .SplitPane > .Resizer { display: none !important; }
+  #nc-root [class*="ToolbarContainer"] {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    align-content: flex-start;
+    width: 100% !important;
+    min-width: 0 !important;
+    height: 108px !important;
+  }
+  #nc-root [class*="ToolbarSectionBackLink"] {
+    flex: 0 0 100% !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    height: 54px !important;
+    border-bottom: 1px solid var(--sa-line);
+  }
+  #nc-root [class*="ToolbarSectionMain"] {
+    flex: 0 0 100% !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    height: 54px !important;
+    justify-content: flex-end;
+  }
+  #nc-root [class*="ToolbarSectionMeta"] { display: none !important; }
+  #nc-root .SplitPane {
+    top: 108px !important;
+    height: calc(100% - 42px) !important;
+  }
   #nc-root [class*="ControlPane"] input:not([type="checkbox"]):not([type="radio"]):not([type="range"]),
   #nc-root [class*="ControlPane"] textarea,
   #nc-root [class*="ControlPane"] select { max-width: 100%; }

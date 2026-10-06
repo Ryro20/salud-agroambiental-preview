@@ -18,7 +18,7 @@
       const themeLink = document.createElement('link');
 
       themeLink.rel = 'stylesheet';
-      themeLink.href = siteAssetUrl('admin/admin.css?v=6');
+      themeLink.href = siteAssetUrl('admin/admin.css?v=9');
       themeLink.dataset.salbiAdminTheme = 'true';
 
       document.head.appendChild(themeLink);
@@ -139,6 +139,14 @@
       return fallback || '';
     }
 
+    function previewAssetUrl(value) {
+      const path = String(value);
+
+      return path.charAt(0) === '/' && path.charAt(1) !== '/'
+        ? new URL(path.slice(1), siteBaseUrl).href
+        : path;
+    }
+
     function assetUrl(getAsset, value) {
       if (!value) {
         return '';
@@ -148,12 +156,12 @@
         const asset = getAsset(value);
 
         if (!asset) {
-          return String(value);
+          return previewAssetUrl(value);
         }
 
-        return asset.toString();
+        return previewAssetUrl(asset.toString());
       } catch (error) {
-        return String(value);
+        return previewAssetUrl(value);
       }
     }
 
@@ -1502,6 +1510,11 @@
         '[data-admin-close]'
       );
 
+    const editorBackButton =
+      document.querySelector(
+        '[data-admin-editor-back]'
+      );
+
     const cmsRoot = document.querySelector('#nc-root');
 
     function translateAddButtons(node) {
@@ -1568,6 +1581,27 @@
           childList: true,
           characterData: true,
           subtree: true
+        }
+      );
+    }
+
+    if (editorBackButton && cmsRoot) {
+      editorBackButton.addEventListener(
+        'click',
+        function () {
+          const collectionBackLink =
+            cmsRoot.querySelector(
+              '[class*="EditorContainer"] a[href="#/collections/posts"]'
+            );
+
+          if (!collectionBackLink) {
+            console.error(
+              'No se encontró el enlace de regreso a publicaciones del editor.'
+            );
+            return;
+          }
+
+          collectionBackLink.click();
         }
       );
     }

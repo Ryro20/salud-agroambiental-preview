@@ -19,7 +19,11 @@
     </a>
 
     <div class="salbi-admin-actions">
-      <a href="../" target="_blank" rel="noopener" class="salbi-admin-link">Ver web</a>
+      <button type="button" class="salbi-admin-link salbi-admin-editor-back" data-admin-editor-back aria-label="Volver a publicaciones">
+        <span class="salbi-admin-editor-back__wide">Volver a publicaciones</span>
+        <span class="salbi-admin-editor-back__compact" aria-hidden="true">Volver</span>
+      </button>
+      <a href="../" target="_blank" rel="noopener" class="salbi-admin-link salbi-admin-site-link">Ver web</a>
       <button type="button" class="salbi-admin-link salbi-admin-help" data-admin-help>Ayuda</button>
     </div>
   </header>
@@ -53,6 +57,6 @@
     window.CMS_MANUAL_INIT = true;
   </script>
   <script defer src="https://unpkg.com/decap-cms@3.16.2/dist/decap-cms.js"></script>
-  <script defer src="custom-cms.js?v=8"></script>
+  <script defer src="custom-cms.js?v=11"></script>
 </body>
 </html>
